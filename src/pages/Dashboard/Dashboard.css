@@ -2,6 +2,11 @@
    ESTILO BASE DO APP
 =========================== */
 
+html, body {
+  height: 100%;
+  overflow-x: hidden;
+}
+
 .dashboard-page {
   background-image: url("../../../public/images/bg-login.png");
   background-repeat: no-repeat;
