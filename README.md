@@ -1,73 +1,106 @@
-# React + TypeScript + Vite
+💪 Meu Treino — Workout App (React + TypeScript + Firebase + PWA)
+Meu Treino é um aplicativo moderno desenvolvido em React + TypeScript, projetado para ajudar usuários a organizar e acompanhar seus treinos de forma simples, rápida e intuitiva.
+O app permite criar treinos personalizados (A, B e C), adicionar exercícios com GIFs demonstrativos, registrar séries, repetições e cargas, além de salvar tudo automaticamente no Firestore e no localStorage.
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+🚀 Tecnologias Utilizadas
+React
 
-Currently, two official plugins are available:
+TypeScript
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+Firebase Authentication
 
-## React Compiler
+Firestore Database
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+Vite
 
-## Expanding the ESLint configuration
+PWA (Progressive Web App)
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+CSS Responsivo
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+📌 Funcionalidades
+✔ Autenticação Firebase
+Login com Google
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
+Login com Email/Senha
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+✔ Dashboard Completo
+Treinos A, B e C
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+Lista de exercícios personalizada
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+Inputs de séries, reps e peso com autosave
 
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+✔ Modal de Exercícios
+Filtro por categorias
+
+GIFs animados
+
+Visualização ampliada
+
+✔ PWA Integrado
+Instalável no celular e desktop
+
+Cache inteligente
+
+Funciona offline
+
+✔ Arquitetura Moderna
+React + TypeScript
+
+Hooks personalizados
+
+Firebase modular
+
+Componentização limpa
+
+📂 Estrutura do Projeto
+txt
+src/
+  pages/
+    Login/
+    Dashboard/
+      components/
+  hooks/
+  services/
+  assets/
+public/
+  images/
+🛠️ Como Rodar o Projeto
+1. Instale as dependências
+sh
+npm install
+2. Configure o Firebase
+Crie o arquivo:
+
+txt
+src/services/firebase.ts
+E adicione suas credenciais do Firebase.
+
+3. Rode o projeto
+sh
+npm run dev
+4. Build para produção
+sh
+npm run build
+📱 PWA — Instalação
+O app pode ser instalado em:
+
+Android
+
+iOS
+
+Windows
+
+macOS
+
+Navegadores modernos
+
+O botão “Instalar Aplicativo” aparecerá automaticamente em navegadores compatíveis.
+
+📄 Licença
+Projeto de uso pessoal e educacional.
+Sinta-se livre para estudar, modificar e evoluir.
+
+🙋‍♂️ Autor
+Wesley Barbosa Rodrigues  
+Criador do Meu Treino
