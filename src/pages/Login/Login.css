@@ -1,0 +1,116 @@
+/* ===========================
+   PÁGINA DE LOGIN
+=========================== */
+
+.login-page {
+  background-image: url("../../../public/images/bg-login.png");
+  background-size: cover;
+  background-repeat: no-repeat;
+  min-height: 100vh;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  font-family: Arial, sans-serif;
+  color: #F5F5F5;
+}
+
+/* ===========================
+   CAIXA CENTRAL
+=========================== */
+
+.login-box {
+  background: rgba(0, 0, 0, 0.75);
+  padding: 30px;
+  border-radius: 12px;
+  width: 90%;
+  max-width: 380px;
+  text-align: center;
+  box-shadow: 0 0 20px rgba(0,0,0,0.5);
+}
+
+.login-title {
+  color: #C8A96B;
+  margin-bottom: 20px;
+  font-size: 28px;
+}
+
+/* ===========================
+   FORMULÁRIO
+=========================== */
+
+.login-form {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.login-form input {
+  padding: 12px;
+  border-radius: 8px;
+  border: 2px solid #C8A96B;
+  background: #1B1B1B;
+  color: #C8A96B;
+  font-size: 16px;
+}
+
+.login-btn {
+  padding: 12px;
+  background: #C8A96B;
+  color: #1B1B1B;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 18px;
+  font-weight: bold;
+  margin-top: 10px;
+  transition: background 0.2s ease;
+}
+
+.login-btn:hover {
+  background: #e6c98a;
+}
+
+/* ===========================
+   DIVISOR
+=========================== */
+
+.divider {
+  margin: 20px 0;
+  color: #C8A96B;
+  font-weight: bold;
+}
+
+/* ===========================
+   BOTÃO GOOGLE
+=========================== */
+
+.google-btn {
+  width: 100%;
+  padding: 12px;
+  background: #ffffff;
+  color: #1B1B1B;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 18px;
+  font-weight: bold;
+  transition: opacity 0.2s ease;
+}
+
+.google-btn:hover {
+  opacity: 0.85;
+}
+
+/* ===========================
+   ERRO
+=========================== */
+
+.login-error {
+  background: #ff4d4d;
+  padding: 10px;
+  border-radius: 8px;
+  margin-bottom: 15px;
+  font-weight: bold;
+}
