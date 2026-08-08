@@ -9,10 +9,21 @@ type EditExerciseModalProps = {
 };
 
 export function EditExerciseModal({ item, onClose, onSave }: EditExerciseModalProps) {
-  const [localItem, setLocalItem] = useState<TreinoItem>(item);
+  const [localItem, setLocalItem] = useState({
+    ...item,
+    series: String(item.series),
+    reps: String(item.reps),
+    peso: item.peso ? String(item.peso) : "",
+  });
 
   function handleSave() {
-    onSave(localItem);
+    onSave({
+      name: item.name,
+      series: Number(localItem.series || 0),
+      reps: Number(localItem.reps || 0),
+      peso: Number(localItem.peso || 0),
+      gif: item.gif,
+    });
   }
 
   return (
@@ -26,7 +37,7 @@ export function EditExerciseModal({ item, onClose, onSave }: EditExerciseModalPr
             type="number"
             value={localItem.series}
             onChange={(e) =>
-              setLocalItem({ ...localItem, series: Number(e.target.value) })
+              setLocalItem({ ...localItem, series: e.target.value })
             }
           />
 
@@ -35,16 +46,16 @@ export function EditExerciseModal({ item, onClose, onSave }: EditExerciseModalPr
             type="number"
             value={localItem.reps}
             onChange={(e) =>
-              setLocalItem({ ...localItem, reps: Number(e.target.value) })
+              setLocalItem({ ...localItem, reps: e.target.value })
             }
           />
 
           <label>Peso (kg)</label>
           <input
             type="number"
-            value={localItem.peso ?? 0}
+            value={localItem.peso}
             onChange={(e) =>
-              setLocalItem({ ...localItem, peso: Number(e.target.value) })
+              setLocalItem({ ...localItem, peso: e.target.value })
             }
           />
         </div>

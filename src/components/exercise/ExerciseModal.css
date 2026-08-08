@@ -10,7 +10,7 @@
 }
 
 .modal {
-  width: 100%;
+  width: 80%;
   max-width: 780px;
   max-height: 85vh;
   overflow-y: auto;
@@ -40,6 +40,8 @@
   display: flex;
   gap: 8px;
   margin-bottom: 18px;
+  flex-wrap: wrap;
+
 }
 
 .category-tab {
