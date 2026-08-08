@@ -1,26 +1,112 @@
 .dashboard {
-  padding: 32px;
-  max-width: 900px;
-  margin: 0 auto;
+  min-height: 100vh;
+  background: var(--bg);
+  padding: 20px;
+  color: var(--text);
 }
 
+/* BANNER PRINCIPAL */
+.dashboard-banner {
+  background: var(--glass);
+  border: 1px solid var(--border);
+  backdrop-filter: blur(18px);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  padding: 28px;
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.dashboard-banner h1 {
+  font-size: 28px;
+  font-weight: 700;
+  color: var(--text);
+}
+
+.dashboard-banner p {
+  font-size: 14px;
+  color: var(--text-muted);
+}
+
+/* BOTÃO PRINCIPAL */
 .dashboard-actions {
-  margin: 24px 0;
-  display: flex;
-  justify-content: flex-end;
+  margin: 20px 0;
 }
 
 .open-exercise-btn {
-  padding: 12px 20px;
-  background: var(--accent);
-  border: none;
+  width: 100%;
+  background: linear-gradient(135deg, var(--accent), var(--accent-hover));
+  padding: 14px;
   border-radius: var(--radius);
-  color: white;
+  border: none;
+  color: var(--text);
   font-size: 16px;
+  font-weight: 600;
   cursor: pointer;
-  transition: 0.2s;
+  box-shadow: 0 0 12px rgba(123, 92, 255, 0.5);
+  transition: all 0.3s ease;
 }
 
 .open-exercise-btn:hover {
-  background: var(--accent-hover);
+  transform: scale(1.05);
+}
+
+/* LISTA DE EXERCÍCIOS */
+.exercise-list {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+/* CARD DE EXERCÍCIO */
+.exercise-card {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  background: var(--glass);
+  border: 1px solid var(--border);
+  backdrop-filter: blur(14px);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  padding: 14px;
+}
+
+.exercise-gif {
+  width: 70px;
+  height: 70px;
+  border-radius: var(--radius);
+  object-fit: cover;
+}
+
+.exercise-info h3 {
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--text);
+}
+
+.exercise-info p {
+  font-size: 13px;
+  color: var(--text-muted);
+}
+
+/* AÇÕES */
+.exercise-actions {
+  margin-left: auto;
+  display: flex;
+  gap: 10px;
+}
+
+.exercise-actions button {
+  background: rgba(255, 255, 255, 0.15);
+  border: none;
+  padding: 8px;
+  border-radius: var(--radius);
+  cursor: pointer;
+  color: var(--text);
+  font-size: 16px;
+  transition: all 0.3s ease;
+}
+
+.exercise-actions button:hover {
+  background: rgba(255, 255, 255, 0.25);
 }

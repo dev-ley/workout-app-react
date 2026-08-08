@@ -7,9 +7,8 @@ export default function Login() {
   return (
     <div className="login-page">
       <div className="login-card glass">
-        <h1 className="login-title">Workout App</h1>
-        <p className="login-subtitle">Glassmorphism Edition</p>
-
+        <h1 className="login-title">Meu Ginasio</h1>
+          <br />
         <button className="google-btn" onClick={loginWithGoogle}>
           <img
             src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/google/google-original.svg"

@@ -1,32 +1,35 @@
+/* Fundo escurecido translúcido */
 .modal-backdrop {
   position: fixed;
   inset: 0;
-  background: rgba(0, 0, 0, 0.55);
+  background: rgba(0, 0, 0, 0.6);
+  backdrop-filter: blur(6px);
   display: flex;
-  justify-content: center;
   align-items: center;
-  backdrop-filter: blur(4px);
-  z-index: 999;
+  justify-content: center;
 }
 
+/* Container principal do modal */
 .modal {
-  width: 350px;
+  background: rgba(255, 255, 255, 0.12);
+  backdrop-filter: blur(18px);
+  border-radius: 20px;
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
   padding: 24px;
-  border-radius: var(--radius);
+  width: 320px;
+  color: #fff;
   animation: fadeIn 0.25s ease;
 }
 
-@keyframes fadeIn {
-  from { transform: scale(0.9); opacity: 0; }
-  to { transform: scale(1); opacity: 1; }
-}
-
 .modal h2 {
-  margin-top: 0;
+  font-size: 20px;
+  font-weight: 700;
+  text-align: center;
   margin-bottom: 16px;
-  color: var(--text);
 }
 
+/* Campos */
 .modal-fields {
   display: flex;
   flex-direction: column;
@@ -35,38 +38,67 @@
 
 .modal-fields label {
   font-size: 14px;
-  color: var(--text-muted);
+  font-weight: 600;
+  opacity: 0.9;
 }
 
 .modal-fields input {
+  font-size: 16px; /* ESSENCIAL para evitar zoom */
   padding: 10px;
   border-radius: var(--radius);
   border: 1px solid var(--border);
-  background: rgba(255, 255, 255, 0.1);
+  background: var(--glass-heavy);
   color: var(--text);
-  font-size: 16px;
+  outline: none;
+  -webkit-text-size-adjust: 100%;
 }
 
+
+.modal-fields input:focus {
+  border-color: #262237;
+  box-shadow: 0 0 8px rgba(72, 49, 172, 0.5);
+}
+
+/* Botões */
 .modal-actions {
   margin-top: 20px;
   display: flex;
   justify-content: space-between;
 }
 
-.cancel-btn {
-  background: transparent;
-  border: 1px solid var(--border);
+.cancel-btn,
+.save-btn {
   padding: 10px 16px;
-  border-radius: var(--radius);
-  color: var(--text);
+  border-radius: 10px;
+  border: none;
   cursor: pointer;
+  font-size: 14px;
+  font-weight: 600;
+  transition: all 0.3s ease;
+}
+
+.cancel-btn {
+  background: rgba(255, 255, 255, 0.15);
+  color: #fff;
+}
+
+.cancel-btn:hover {
+  background: rgba(255, 255, 255, 0.25);
 }
 
 .save-btn {
-  background: var(--accent);
-  border: none;
-  padding: 10px 16px;
-  border-radius: var(--radius);
-  color: white;
-  cursor: pointer;
+  background: linear-gradient(135deg, #010006, #361959);
+  color: #fff;
+  box-shadow: 0 0 12px rgba(95, 95, 230, 0.5);
 }
+
+.save-btn:hover {
+  transform: scale(1.05);
+}
+
+/* Animação */
+@keyframes fadeIn {
+  from { opacity: 0; transform: scale(0.95); }
+  to { opacity: 1; transform: scale(1); }
+}
+

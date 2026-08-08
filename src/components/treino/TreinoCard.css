@@ -32,3 +32,19 @@
 .treino-actions button:hover {
   transform: scale(1.2);
 }
+
+.remove-btn {
+  background: rgba(255, 0, 0, 0.15);
+  border: 1px solid rgba(255, 0, 0, 0.35);
+  color: #ff4d4d;
+  padding: 8px;
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  font-size: 18px;
+  transition: 0.25s ease;
+}
+
+.remove-btn:hover {
+  background: rgba(255, 0, 0, 0.25);
+  transform: scale(1.1);
+}

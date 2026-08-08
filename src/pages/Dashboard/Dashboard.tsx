@@ -1,9 +1,8 @@
 import "./Dashboard.css";
 
 import { useState } from "react";
-import { Header } from "../../components/layout/Header";
-import { UserInfo } from "../../components/layout/UserInfo";
 
+import { Header } from "../../components/layout/Header";
 import { TreinoTabs } from "../../components/treino/TreinoTabs";
 import { TreinoList } from "../../components/treino/TreinoList";
 
@@ -46,8 +45,8 @@ export default function Dashboard() {
 
   return (
     <div className="dashboard">
+
       <Header />
-      <UserInfo />
 
       <TreinoTabs active={activeTreino} onChange={setActiveTreino} />
 
@@ -56,7 +55,7 @@ export default function Dashboard() {
           className="open-exercise-btn"
           onClick={() => setShowExerciseModal(true)}
         >
-          Adicionar Exercício
+          + Adicionar Exercício
         </button>
       </div>
 

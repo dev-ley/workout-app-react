@@ -44,8 +44,9 @@ export function TreinoCard({
           </button>
 
           <button className="remove-btn" onClick={onRemove}>
-            ✖
+            ❌
           </button>
+
         </div>
       </div>
 

@@ -28,46 +28,35 @@ export function EditExerciseModal({ item, onClose, onSave }: EditExerciseModalPr
 
   return (
     <div className="modal-backdrop" onClick={onClose}>
-      <div className="modal glass" onClick={(e) => e.stopPropagation()}>
-        <h2>Editar exercício</h2>
+      <div className="modal" onClick={(e) => e.stopPropagation()}>
+        <h2>Editar Exercício</h2>
 
         <div className="modal-fields">
           <label>Séries</label>
           <input
             type="number"
             value={localItem.series}
-            onChange={(e) =>
-              setLocalItem({ ...localItem, series: e.target.value })
-            }
+            onChange={(e) => setLocalItem({ ...localItem, series: e.target.value })}
           />
 
           <label>Repetições</label>
           <input
             type="number"
             value={localItem.reps}
-            onChange={(e) =>
-              setLocalItem({ ...localItem, reps: e.target.value })
-            }
+            onChange={(e) => setLocalItem({ ...localItem, reps: e.target.value })}
           />
 
           <label>Peso (kg)</label>
           <input
             type="number"
             value={localItem.peso}
-            onChange={(e) =>
-              setLocalItem({ ...localItem, peso: e.target.value })
-            }
+            onChange={(e) => setLocalItem({ ...localItem, peso: e.target.value })}
           />
         </div>
 
         <div className="modal-actions">
-          <button className="cancel-btn" onClick={onClose}>
-            Cancelar
-          </button>
-
-          <button className="save-btn" onClick={handleSave}>
-            Salvar
-          </button>
+          <button className="cancel-btn" onClick={onClose}>Cancelar</button>
+          <button className="save-btn" onClick={handleSave}>Salvar</button>
         </div>
       </div>
     </div>
