@@ -5,6 +5,7 @@
   margin-bottom: 24px;
 }
 
+/* TAB */
 .treino-tab {
   flex: 1;
   padding: 12px;
@@ -13,16 +14,19 @@
   border-radius: var(--radius);
   color: var(--text-muted);
   cursor: pointer;
-  transition: 0.2s;
+  transition: var(--transition);
 }
 
+/* TAB ATIVO */
 .treino-tab.active {
-  background: var(--accent);
-  color: white;
+  background: var(--gradient-accent); /* gradiente roxo global */
+  color: var(--text);
   border-color: transparent;
+  box-shadow: 0 0 10px rgba(123, 92, 255, 0.4);
 }
 
+/* HOVER */
 .treino-tab:hover {
   background: var(--accent-hover);
-  color: white;
+  color: var(--text);
 }

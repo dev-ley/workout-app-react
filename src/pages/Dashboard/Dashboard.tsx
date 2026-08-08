@@ -1,18 +1,21 @@
 import "./Dashboard.css";
-
 import { useState } from "react";
 
 import { Header } from "../../components/layout/Header";
-import { TreinoTabs } from "../../components/treino/TreinoTabs";
 import { TreinoList } from "../../components/treino/TreinoList";
 
 import { ExerciseModal } from "../../components/exercise/ExerciseModal";
 import { GifModal } from "../../components/exercise/GifModal";
 import { ChooseTreinoModal } from "../../components/exercise/ChooseTreinoModal";
+import { ExerciciosPage } from "../../components/exercise/ExerciciosPage";
 
 import { useTreinos } from "../../hooks/useTreinos";
 
 export default function Dashboard() {
+  const [activeTab, setActiveTab] = useState<
+    "treinos" | "exercicios" | "dieta" | "progresso"
+  >("treinos");
+
   const [activeTreino, setActiveTreino] = useState<"A" | "B" | "C">("A");
 
   const { treinos, addExercise, removeExercise, updateExercise } = useTreinos();
@@ -45,31 +48,76 @@ export default function Dashboard() {
 
   return (
     <div className="dashboard">
+      <Header activeTab={activeTab} onChangeTab={setActiveTab} />
 
-      <Header />
+      {/* ========================= TREINOS ========================= */}
+      {activeTab === "treinos" && (
+        <>
+          {/* TREINO A / B / C */}
+          <div className="treino-selector glass">
+            {(["A", "B", "C"] as const).map((t) => (
+              <button
+                key={t}
+                className={`treino-btn ${activeTreino === t ? "active" : ""}`}
+                onClick={() => setActiveTreino(t)}
+              >
+                Treino {t}
+              </button>
+            ))}
+          </div>
 
-      <TreinoTabs active={activeTreino} onChange={setActiveTreino} />
+          {/* BOTÃO ADICIONAR */}
+          <div className="dashboard-actions">
+            <button
+              className="open-exercise-btn"
+              onClick={() => setShowExerciseModal(true)}
+            >
+              + Adicionar Exercício
+            </button>
+          </div>
 
-      <div className="dashboard-actions">
-        <button
-          className="open-exercise-btn"
-          onClick={() => setShowExerciseModal(true)}
-        >
-          + Adicionar Exercício
-        </button>
-      </div>
+          {/* LISTA DO TREINO ATIVO */}
+          <TreinoList
+            treino={activeTreino}
+            items={treinos[activeTreino]}
+            removeExercise={removeExercise}
+            updateExercise={updateExercise}
+            onOpenGif={(url: string) => {
+              setGifUrl(url);
+              setShowGifModal(true);
+            }}
+          />
+        </>
+      )}
 
-      <TreinoList
-        treino={activeTreino}
-        items={treinos[activeTreino]}
-        removeExercise={removeExercise}
-        updateExercise={updateExercise}
-        onOpenGif={(url: string) => {
-          setGifUrl(url);
-          setShowGifModal(true);
-        }}
-      />
+      {/* ========================= EXERCÍCIOS ========================= */}
+      {activeTab === "exercicios" && (
+        <ExerciciosPage
+          onSelectExercise={handleAddExercise}
+          onOpenGif={(url) => {
+            setGifUrl(url);
+            setShowGifModal(true);
+          }}
+        />
+      )}
 
+      {/* ========================= DIETA ========================= */}
+      {activeTab === "dieta" && (
+        <div className="placeholder glass">
+          <h2>🍎 Área de Dieta</h2>
+          <p>Em breve você poderá montar sua dieta personalizada aqui.</p>
+        </div>
+      )}
+
+      {/* ========================= PROGRESSO ========================= */}
+      {activeTab === "progresso" && (
+        <div className="placeholder glass">
+          <h2>📈 Progresso</h2>
+          <p>Acompanhe seus resultados e evolução física.</p>
+        </div>
+      )}
+
+      {/* ========================= MODAIS ========================= */}
       {showExerciseModal && (
         <ExerciseModal
           onClose={() => setShowExerciseModal(false)}

@@ -3,32 +3,48 @@
   gap: 16px;
   padding: 16px;
   margin-bottom: 16px;
+  background: var(--glass);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  backdrop-filter: blur(14px);
+  transition: var(--transition);
 }
 
+.exercise-card:hover {
+  transform: scale(1.02);
+}
+
+/* GIF */
 .exercise-gif {
   width: 90px;
   height: 90px;
   border-radius: var(--radius);
   object-fit: cover;
   cursor: pointer;
+  box-shadow: var(--shadow);
 }
 
+/* INFO */
 .exercise-info h3 {
   margin: 0;
   font-size: 18px;
+  color: var(--text);
 }
 
+/* BOTÃO ADICIONAR */
 .add-btn {
   margin-top: 8px;
   padding: 8px 14px;
-  background: var(--accent);
+  background: var(--gradient-accent);
   border: none;
-  border-radius: var(--radius);
-  color: white;
+  border-radius: var(--radius-sm);
+  color: var(--text);
   cursor: pointer;
-  transition: 0.2s;
+  transition: var(--transition);
+  box-shadow: 0 0 10px rgba(123, 92, 255, 0.4);
 }
 
 .add-btn:hover {
-  background: var(--accent-hover);
+  transform: scale(1.05);
 }

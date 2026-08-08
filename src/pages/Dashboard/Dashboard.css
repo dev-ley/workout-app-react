@@ -1,31 +1,43 @@
 .dashboard {
   min-height: 100vh;
-  background: var(--bg);
+  background: var(--gradient-dark); /* gradiente global */
   padding: 20px;
   color: var(--text);
 }
 
-/* BANNER PRINCIPAL */
-.dashboard-banner {
+/* SELETOR DE TREINOS A/B/C */
+.treino-selector {
+  display: flex;
+  justify-content: center;
+  gap: 12px;
+  margin: 16px 0;
+  padding: 10px;
+  border-radius: var(--radius);
   background: var(--glass);
   border: 1px solid var(--border);
-  backdrop-filter: blur(18px);
-  border-radius: var(--radius);
   box-shadow: var(--shadow);
-  padding: 28px;
-  text-align: center;
-  margin-bottom: 20px;
 }
 
-.dashboard-banner h1 {
-  font-size: 28px;
-  font-weight: 700;
+.treino-btn {
+  background: transparent;
+  border: 1px solid var(--border);
   color: var(--text);
+  padding: 8px 16px;
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  font-weight: 600;
+  transition: var(--transition);
 }
 
-.dashboard-banner p {
-  font-size: 14px;
-  color: var(--text-muted);
+.treino-btn.active {
+  background: var(--gradient-accent); /* gradiente roxo */
+  color: var(--text);
+  border: none;
+  box-shadow: 0 0 10px rgba(123, 92, 255, 0.4);
+}
+
+.treino-btn:hover {
+  transform: scale(1.05);
 }
 
 /* BOTÃO PRINCIPAL */
@@ -35,7 +47,7 @@
 
 .open-exercise-btn {
   width: 100%;
-  background: linear-gradient(135deg, var(--accent), var(--accent-hover));
+  background: var(--gradient-accent); /* gradiente roxo */
   padding: 14px;
   border-radius: var(--radius);
   border: none;
@@ -44,7 +56,7 @@
   font-weight: 600;
   cursor: pointer;
   box-shadow: 0 0 12px rgba(123, 92, 255, 0.5);
-  transition: all 0.3s ease;
+  transition: var(--transition);
 }
 
 .open-exercise-btn:hover {
@@ -89,7 +101,7 @@
   color: var(--text-muted);
 }
 
-/* AÇÕES */
+/* AÇÕES DO CARD */
 .exercise-actions {
   margin-left: auto;
   display: flex;
@@ -97,16 +109,37 @@
 }
 
 .exercise-actions button {
-  background: rgba(255, 255, 255, 0.15);
+  background: var(--glass-strong);
   border: none;
   padding: 8px;
   border-radius: var(--radius);
   cursor: pointer;
   color: var(--text);
   font-size: 16px;
-  transition: all 0.3s ease;
+  transition: var(--transition);
 }
 
 .exercise-actions button:hover {
   background: rgba(255, 255, 255, 0.25);
+}
+
+/* PLACEHOLDER DAS OUTRAS ABAS */
+.placeholder {
+  text-align: center;
+  padding: 40px 20px;
+  border-radius: var(--radius);
+  background: var(--glass);
+  border: 1px solid var(--border);
+  box-shadow: var(--shadow);
+}
+
+.placeholder h2 {
+  font-size: 20px;
+  font-weight: 700;
+  margin-bottom: 8px;
+}
+
+.placeholder p {
+  font-size: 14px;
+  color: var(--text-muted);
 }

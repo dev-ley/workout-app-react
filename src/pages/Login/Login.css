@@ -1,47 +1,53 @@
+/* PÁGINA DE LOGIN */
 .login-page {
   height: 100vh;
   display: flex;
   align-items: center;
   justify-content: center;
-  background: linear-gradient(135deg, #0f172a, #1e293b);
+  background: var(--gradient-dark); /* fundo global */
   padding: 22px;
 }
 
+/* CARD PRINCIPAL */
 .login-card {
   width: 100%;
   max-width: 420px;
   padding: 32px;
-  border-radius: 26px;
+  border-radius: var(--radius);
   text-align: center;
 
   backdrop-filter: blur(22px);
-  background: rgba(255, 255, 255, 0.08);
-  border: 1px solid rgba(255, 255, 255, 0.18);
-  box-shadow: 0 22px 50px rgba(0, 0, 0, 0.45);
+  background: var(--glass-strong);
+  border: 1px solid var(--border);
+  box-shadow: var(--shadow);
+  color: var(--text);
 }
 
+/* TÍTULO */
 .login-title {
   font-size: 2rem;
-  color: #f3f4f6;
+  color: var(--text);
   margin-bottom: 6px;
 }
 
+/* SUBTÍTULO */
 .login-subtitle {
   font-size: 0.9rem;
-  color: #cbd5e1;
+  color: var(--text-muted);
   margin-bottom: 22px;
 }
 
+/* BOTÃO GOOGLE */
 .google-btn {
   width: 100%;
   padding: 12px 18px;
   border-radius: 999px;
-  border: none;
-  background: rgba(255, 255, 255, 0.22);
-  color: #fff;
+  border: 1px solid var(--border);
+  background: var(--glass);
+  color: var(--text);
   font-size: 1rem;
   cursor: pointer;
-  transition: 0.2s;
+  transition: var(--transition);
 
   display: flex;
   align-items: center;
@@ -50,9 +56,11 @@
 }
 
 .google-btn:hover {
-  background: rgba(255, 255, 255, 0.32);
+  background: var(--glass-strong);
+  transform: scale(1.05);
 }
 
+/* ÍCONE GOOGLE */
 .google-icon {
   width: 22px;
   height: 22px;

@@ -1,10 +1,10 @@
 .header {
-    background: linear-gradient(240deg, #005bff4f, #000000c4);
-    color: var(--text);
-    border-radius: var(--radius);
-    box-shadow: var(--shadow);
-    padding: 20px;
-    margin-bottom: 20px;
+  background: var(--gradient-dark); /* gradiente global */
+  color: var(--text);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  padding: 20px;
+  margin-bottom: 20px;
 }
 
 /* PARTE SUPERIOR */
@@ -29,35 +29,39 @@
   border: 2px solid var(--border);
 }
 
-.header-top h1 {
-  font-size: 22px;
-  font-weight: 700;
+/* BOTÃO LOGOUT */
+.logout-btn {
+  background: var(--glass-strong);
+  border: 1px solid var(--border);
+  color: var(--text);
+  padding: 8px 14px;
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  transition: var(--transition);
 }
 
-/* BANNER PRINCIPAL */
+.logout-btn:hover {
+  background: rgba(255, 255, 255, 0.22);
+  transform: scale(1.05);
+}
+
+/* BANNER */
 .header-banner {
   background-image: url("/images/banner.png");
-  background-repeat: no-repeat;
   background-size: cover;
   background-position: center;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
   border: 1px solid var(--border);
   backdrop-filter: blur(12px);
   border-radius: var(--radius);
   box-shadow: var(--shadow);
   padding: 20px;
-}
-
-.banner-text {
-  flex: 1;
+  margin-bottom: 16px;
 }
 
 .banner-text h2 {
   font-size: 20px;
   font-weight: 700;
-  margin-bottom: 6px;
+  color: var(--text);
 }
 
 .banner-text p {
@@ -66,8 +70,9 @@
   margin-bottom: 12px;
 }
 
+/* BOTÃO PRINCIPAL DO HEADER */
 .btn-start {
-  background: linear-gradient(135deg, var(--accent), var(--accent-hover));
+  background: var(--gradient-accent); /* gradiente roxo global */
   color: var(--text);
   border: none;
   border-radius: var(--radius);
@@ -76,26 +81,10 @@
   font-weight: 600;
   cursor: pointer;
   box-shadow: 0 0 10px rgba(123, 92, 255, 0.4);
-  transition: 0.3s ease;
+  transition: var(--transition);
 }
 
 .btn-start:hover {
   transform: scale(1.05);
 }
 
-.logout-btn {
-  background: var(--glass);
-  border: 1px solid var(--border);
-  color: var(--text);
-  padding: 8px 14px;
-  border-radius: var(--radius-sm);
-  font-size: 14px;
-  cursor: pointer;
-  backdrop-filter: blur(10px);
-  transition: 0.3s ease;
-}
-
-.logout-btn:hover {
-  background: rgba(255, 255, 255, 0.18);
-  transform: scale(1.05);
-}

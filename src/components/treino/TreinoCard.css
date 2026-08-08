@@ -4,18 +4,26 @@
   align-items: center;
   padding: 16px;
   margin-bottom: 12px;
-  transition: 0.3s;
+  background: var(--glass);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  backdrop-filter: blur(14px);
+  transition: var(--transition);
 }
 
 .treino-card:hover {
   transform: scale(1.02);
 }
 
+/* INFO */
 .treino-info h3 {
   margin: 0;
   font-size: 18px;
+  color: var(--text);
 }
 
+/* AÇÕES */
 .treino-actions {
   display: flex;
   gap: 10px;
@@ -25,23 +33,25 @@
   background: transparent;
   border: none;
   font-size: 20px;
+  color: var(--text);
   cursor: pointer;
-  transition: 0.2s;
+  transition: var(--transition);
 }
 
 .treino-actions button:hover {
   transform: scale(1.2);
 }
 
+/* BOTÃO REMOVER */
 .remove-btn {
   background: rgba(255, 0, 0, 0.15);
   border: 1px solid rgba(255, 0, 0, 0.35);
-  color: #ff4d4d;
+  color: var(--danger);
   padding: 8px;
   border-radius: var(--radius-sm);
   cursor: pointer;
   font-size: 18px;
-  transition: 0.25s ease;
+  transition: var(--transition);
 }
 
 .remove-btn:hover {

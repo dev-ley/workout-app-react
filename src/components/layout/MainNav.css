@@ -1,0 +1,39 @@
+.main-nav {
+  display: flex;
+  justify-content: space-around;
+  padding: 10px;
+  border-radius: var(--radius);
+  background: var(--glass);
+  border: 1px solid var(--border);
+  box-shadow: var(--shadow);
+}
+
+/* BOTÕES DO NAV */
+.nav-btn {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  color: var(--text);
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  font-size: 14px;
+  transition: var(--transition);
+}
+
+/* ÍCONES */
+.nav-icon {
+  font-size: 22px;
+  margin-bottom: 4px;
+}
+
+/* BOTÃO ATIVO */
+.nav-btn.active {
+  color: var(--accent);
+  transform: scale(1.05);
+}
+
+/* HOVER */
+.nav-btn:hover {
+  color: var(--accent-hover);
+}

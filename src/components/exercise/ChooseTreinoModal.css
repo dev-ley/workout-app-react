@@ -9,12 +9,14 @@
   padding: 10px 14px;
   border-radius: 999px;
   border: none;
-  background: rgba(255, 255, 255, 0.22);
-  color: #fff;
+  background: var(--glass);
+  border: 1px solid var(--border);
+  color: var(--text);
   cursor: pointer;
-  transition: 0.2s;
+  transition: var(--transition);
 }
 
 .choose-btn:hover {
-  background: rgba(255, 255, 255, 0.32);
+  background: var(--glass-strong);
+  transform: scale(1.05);
 }

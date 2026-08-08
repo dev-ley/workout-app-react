@@ -3,39 +3,42 @@
   align-items: center;
   gap: 14px;
   padding: 14px 18px;
-  border-radius: 22px;
+  border-radius: var(--radius);
   backdrop-filter: blur(22px);
-  background: rgba(255, 255, 255, 0.06);
-  border: 1px solid rgba(255, 255, 255, 0.12);
-  box-shadow: 0 18px 40px rgba(0, 0, 0, 0.35);
+  background: var(--glass);
+  border: 1px solid var(--border);
+  box-shadow: var(--shadow);
 }
 
+/* AVATAR */
 .avatar {
   width: 52px;
   height: 52px;
   border-radius: 999px;
-  border: 2px solid rgba(255, 255, 255, 0.25);
+  border: 2px solid var(--border);
 }
 
+/* TEXTO DO USUÁRIO */
 .user-text h2 {
   font-size: 1rem;
-  color: #f3f4f6;
+  color: var(--text);
 }
 
 .user-text p {
   font-size: 0.8rem;
-  color: #cbd5e1;
+  color: var(--text-muted);
 }
 
+/* BOTÃO LOGOUT */
 .logout {
   margin-left: auto;
   padding: 8px 14px;
   border-radius: 999px;
   border: none;
-  background: rgba(255, 255, 255, 0.12);
-  color: #f3f4f6;
+  background: var(--glass-strong);
+  color: var(--text);
   cursor: pointer;
-  transition: 0.2s;
+  transition: var(--transition);
 }
 
 .logout:hover {

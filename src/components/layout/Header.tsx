@@ -1,24 +1,26 @@
 import "./Header.css";
 import { useEffect, useState } from "react";
 import { getAuth, signOut } from "firebase/auth";
+import { MainNav } from "./MainNav";
 
-export function Header() {
+type HeaderProps = {
+  activeTab: "treinos" | "exercicios" | "dieta" | "progresso";
+  onChangeTab: (tab: "treinos" | "exercicios" | "dieta" | "progresso") => void;
+};
+
+export function Header({ activeTab, onChangeTab }: HeaderProps) {
   const [user, setUser] = useState<any>(null);
 
   useEffect(() => {
     const auth = getAuth();
-    const unsubscribe = auth.onAuthStateChanged((u) => {
-      setUser(u);
-    });
-
+    const unsubscribe = auth.onAuthStateChanged((u) => setUser(u));
     return () => unsubscribe();
   }, []);
 
   const firstName = user?.displayName?.split(" ")[0] || "Usuário";
 
   function handleLogout() {
-    const auth = getAuth();
-    signOut(auth);
+    signOut(getAuth());
   }
 
   return (
@@ -35,7 +37,6 @@ export function Header() {
           <h1>Bem-vindo, {firstName}</h1>
         </div>
 
-        {/* BOTÃO DE LOGOUT */}
         <button className="logout-btn" onClick={handleLogout}>
           Sair
         </button>
@@ -48,9 +49,10 @@ export function Header() {
           <p>Supere os seus limites.</p>
           <button className="btn-start">INICIAR TREINO</button>
         </div>
-
-        <div className="banner-image"></div>
       </div>
+
+      {/* NAVEGAÇÃO PRINCIPAL */}
+      <MainNav active={activeTab} onChange={onChangeTab} />
     </header>
   );
 }

@@ -1,14 +1,18 @@
 .gif-modal {
   padding: 22px;
-  border-radius: 26px;
-  background: rgba(255, 255, 255, 0.08);
-  border: 1px solid rgba(255, 255, 255, 0.18);
-  box-shadow: 0 22px 50px rgba(0, 0, 0, 0.45);
+  border-radius: var(--radius);
+  background: var(--glass-strong);
+  border: 1px solid var(--border);
+  box-shadow: var(--shadow);
   max-width: 720px;
+  backdrop-filter: blur(18px);
+  color: var(--text);
 }
 
+/* IMAGEM DO GIF */
 .gif-modal-img {
   width: 100%;
-  border-radius: 18px;
+  border-radius: var(--radius-sm);
   margin-bottom: 12px;
+  box-shadow: var(--shadow);
 }
