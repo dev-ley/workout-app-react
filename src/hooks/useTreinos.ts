@@ -1,54 +1,133 @@
 import { useEffect, useState } from "react";
-import {
-  loadTreino,
-  removeExerciseFromTreino,
-} from "../services/firebase";
+import { doc, getDoc, setDoc } from "firebase/firestore";
+import { db } from "../services/firebase";
+import { useAuthContext } from "../context/AuthContext";
 
-export interface TreinoExercise {
+export type TreinoItem = {
   name: string;
-  category: string;
-  gif: string;
-}
+  series: number;
+  reps: number;
+  peso?: number;
+  gif?: string;
+};
 
-export function useTreinos(treino: "A" | "B" | "C", reload: number) {
-  const [exercicios, setExercicios] = useState<TreinoExercise[]>([]);
-  const [loading, setLoading] = useState(true);
+type TreinosState = {
+  A: TreinoItem[];
+  B: TreinoItem[];
+  C: TreinoItem[];
+};
 
+export function useTreinos() {
+  const { user } = useAuthContext();
+
+  const [treinos, setTreinos] = useState<TreinosState>({
+    A: [],
+    B: [],
+    C: [],
+  });
+
+  const [loaded, setLoaded] = useState(false);
+
+  // ============================================================
+  // 1. CARREGAR DO FIREBASE OU LOCALSTORAGE
+  // ============================================================
   useEffect(() => {
     async function load() {
-      const data = await loadTreino(treino);
-      setExercicios(data);
-      setLoading(false);
+      if (!user) return;
+
+      const ref = doc(db, "treinos", user.uid);
+      const snap = await getDoc(ref);
+
+      if (snap.exists()) {
+        const data = snap.data() as Partial<TreinosState>;
+        setTreinos({
+          A: data.A ?? [],
+          B: data.B ?? [],
+          C: data.C ?? [],
+        });
+      } else {
+        const saved = localStorage.getItem("treinos");
+        if (saved) {
+          const parsed = JSON.parse(saved);
+          setTreinos({
+            A: parsed.A ?? [],
+            B: parsed.B ?? [],
+            C: parsed.C ?? [],
+          });
+        }
+      }
+
+      setLoaded(true);
     }
+
     load();
-  }, [treino, reload]);
+  }, [user]);
 
-  function saveLocal(ex: TreinoExercise, sets: string, reps: string, peso: string) {
-    const key = `treino${treino}-${ex.name}`;
-    localStorage.setItem(key, JSON.stringify({ sets, reps, peso }));
+  // ============================================================
+  // 2. SALVAR NO LOCALSTORAGE
+  // ============================================================
+  useEffect(() => {
+    if (!loaded) return;
+    localStorage.setItem("treinos", JSON.stringify(treinos));
+  }, [treinos, loaded]);
+
+  // ============================================================
+  // 3. SALVAR NO FIREBASE (SÓ DEPOIS DE CARREGAR)
+  // ============================================================
+  useEffect(() => {
+    if (!loaded) return;
+    if (!user) return;
+
+    async function save() {
+      const ref = doc(db, "treinos", user.uid);
+
+      await setDoc(
+        ref,
+        {
+          A: treinos.A ?? [],
+          B: treinos.B ?? [],
+          C: treinos.C ?? [],
+        },
+        { merge: true }
+      );
+    }
+
+    save();
+  }, [treinos, loaded, user]);
+
+  // ============================================================
+  // 4. ADICIONAR EXERCÍCIO
+  // ============================================================
+  function addExercise(treino: "A" | "B" | "C", exercise: TreinoItem) {
+    setTreinos((prev) => ({
+      ...prev,
+      [treino]: [...prev[treino], exercise],
+    }));
   }
 
-  function loadLocal(ex: TreinoExercise) {
-    const key = `treino${treino}-${ex.name}`;
-    return JSON.parse(localStorage.getItem(key) || "{}");
+  // ============================================================
+  // 5. REMOVER EXERCÍCIO
+  // ============================================================
+  function removeExercise(treino: "A" | "B" | "C", index: number) {
+    setTreinos((prev) => ({
+      ...prev,
+      [treino]: prev[treino].filter((_, i) => i !== index),
+    }));
   }
 
-  async function removeExercise(ex: TreinoExercise) {
-    const filtered = exercicios.filter((e) => e.name !== ex.name);
-
-    await removeExerciseFromTreino(treino, filtered);
-
-    const key = `treino${treino}-${ex.name}`;
-    localStorage.removeItem(key);
-
-    setExercicios(filtered);
+  // ============================================================
+  // 6. ATUALIZAR EXERCÍCIO
+  // ============================================================
+  function updateExercise(
+    treino: "A" | "B" | "C",
+    index: number,
+    updated: TreinoItem
+  ) {
+    setTreinos((prev) => ({
+      ...prev,
+      [treino]: prev[treino].map((item, i) => (i === index ? updated : item)),
+    }));
   }
 
-  return {
-    exercicios,
-    loading,
-    saveLocal,
-    loadLocal,
-    removeExercise,
-  };
+  return { treinos, addExercise, removeExercise, updateExercise };
 }

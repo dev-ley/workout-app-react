@@ -1,56 +1,37 @@
 import { useEffect, useState, useMemo } from "react";
-import { db } from "../services/firebase";
-import { collection, getDocs } from "firebase/firestore";
+import { loadExercises } from "../services/exerciseService";
 
-export interface Exercise {
+type Exercise = {
   name: string;
   category: string;
   gif: string;
-}
+};
 
 export function useExercises() {
+  const [allExercises, setAllExercises] = useState<Exercise[]>([]);
   const [exercises, setExercises] = useState<Exercise[]>([]);
+  const [category, setCategory] = useState("Peito");
   const [loading, setLoading] = useState(true);
-  const [category, setCategory] = useState("all");
 
-  // ===============================
-  // CARREGAR EXERCÍCIOS DO FIRESTORE
-  // ===============================
+  const categories = useMemo(
+    () => ["Peito", "Costas", "Pernas", "Ombro", "Braço"],
+    []
+  );
+
   useEffect(() => {
-    async function load() {
-      const snap = await getDocs(collection(db, "exercises"));
-      const list: Exercise[] = [];
-
-      snap.forEach((doc) => list.push(doc.data() as Exercise));
-
-      setExercises(list);
+    async function fetch() {
+      setLoading(true);
+      const list = await loadExercises();
+      setAllExercises(list);
       setLoading(false);
     }
 
-    load();
+    fetch();
   }, []);
 
-  // ===============================
-  // CATEGORIAS ÚNICAS
-  // ===============================
-  const categories = useMemo(() => {
-    const cats = [...new Set(exercises.map((ex) => ex.category))];
-    return ["all", ...cats];
-  }, [exercises]);
+  useEffect(() => {
+    setExercises(allExercises.filter((ex) => ex.category === category));
+  }, [category, allExercises]);
 
-  // ===============================
-  // FILTRAR EXERCÍCIOS
-  // ===============================
-  const filteredExercises = useMemo(() => {
-    if (category === "all") return exercises;
-    return exercises.filter((ex) => ex.category === category);
-  }, [category, exercises]);
-
-  return {
-    exercises: filteredExercises,
-    categories,
-    category,
-    setCategory,
-    loading,
-  };
+  return { exercises, categories, category, setCategory, loading };
 }

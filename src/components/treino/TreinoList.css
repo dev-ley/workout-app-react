@@ -1,0 +1,11 @@
+.treino-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.empty {
+  color: #cbd5e1;
+  text-align: center;
+  padding: 18px;
+}

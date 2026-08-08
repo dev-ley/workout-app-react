@@ -1,0 +1,34 @@
+.exercise-card {
+  display: flex;
+  gap: 16px;
+  padding: 16px;
+  margin-bottom: 16px;
+}
+
+.exercise-gif {
+  width: 90px;
+  height: 90px;
+  border-radius: var(--radius);
+  object-fit: cover;
+  cursor: pointer;
+}
+
+.exercise-info h3 {
+  margin: 0;
+  font-size: 18px;
+}
+
+.add-btn {
+  margin-top: 8px;
+  padding: 8px 14px;
+  background: var(--accent);
+  border: none;
+  border-radius: var(--radius);
+  color: white;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+.add-btn:hover {
+  background: var(--accent-hover);
+}

@@ -1,0 +1,20 @@
+.choose-buttons {
+  display: flex;
+  gap: 12px;
+  margin: 18px 0;
+}
+
+.choose-btn {
+  flex: 1;
+  padding: 10px 14px;
+  border-radius: 999px;
+  border: none;
+  background: rgba(255, 255, 255, 0.22);
+  color: #fff;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+.choose-btn:hover {
+  background: rgba(255, 255, 255, 0.32);
+}

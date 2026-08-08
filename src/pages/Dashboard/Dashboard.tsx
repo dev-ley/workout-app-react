@@ -1,95 +1,98 @@
-import { useState } from "react";
 import "./Dashboard.css";
 
-import { useAuth } from "../../hooks/useAuth";
+import { useState } from "react";
+import { Header } from "../../components/layout/Header";
+import { UserInfo } from "../../components/layout/UserInfo";
 
-import { Header } from "./components/Header";
-import { UserInfo } from "./components/UserInfo";
-import { TreinoTabs } from "./components/TreinoTabs";
-import { TreinoList } from "./components/TreinoList";
-import { ExerciseModal } from "./components/ExerciseModal";
-import { GifModal } from "./components/GifModal";
-import { ChooseTreinoModal } from "./components/ChooseTreinoModal";
+import { TreinoTabs } from "../../components/treino/TreinoTabs";
+import { TreinoList } from "../../components/treino/TreinoList";
 
-export function Dashboard() {
-  const { user, loading } = useAuth();
+import { ExerciseModal } from "../../components/exercise/ExerciseModal";
+import { GifModal } from "../../components/exercise/GifModal";
+import { ChooseTreinoModal } from "../../components/exercise/ChooseTreinoModal";
 
+import { useTreinos } from "../../hooks/useTreinos";
+
+export default function Dashboard() {
   const [activeTreino, setActiveTreino] = useState<"A" | "B" | "C">("A");
 
-  const [reloadTreino, setReloadTreino] = useState(0);
+  const { treinos, addExercise, removeExercise, updateExercise } = useTreinos();
 
   const [showExerciseModal, setShowExerciseModal] = useState(false);
   const [showGifModal, setShowGifModal] = useState(false);
-  const [gifUrl, setGifUrl] = useState<string | null>(null);
+  const [gifUrl, setGifUrl] = useState<string>("");
 
-  const [showChooseModal, setShowChooseModal] = useState(false);
-  const [selectedExercise, setSelectedExercise] = useState<any>(null);
+  const [exerciseToAdd, setExerciseToAdd] = useState<any | null>(null);
+  const [showChooseTreinoModal, setShowChooseTreinoModal] = useState(false);
 
-  if (loading) return <p className="loading">Carregando...</p>;
+  function handleAddExercise(exercise: any) {
+    setExerciseToAdd(exercise);
+    setShowChooseTreinoModal(true);
+  }
+
+  function addToTreino(treino: "A" | "B" | "C") {
+    if (!exerciseToAdd) return;
+
+    addExercise(treino, {
+      name: exerciseToAdd.name,
+      series: 3,
+      reps: 12,
+      peso: 0,
+      gif: exerciseToAdd.gif,
+    });
+
+    setShowChooseTreinoModal(false);
+  }
 
   return (
-    <main className="dashboard-page">
-
+    <div className="dashboard">
       <Header />
+      <UserInfo />
 
-      <div className="dashboard">
+      <TreinoTabs active={activeTreino} onChange={setActiveTreino} />
 
-        <UserInfo user={user} />
-
+      <div className="dashboard-actions">
         <button
-          className="new-treino"
+          className="open-exercise-btn"
           onClick={() => setShowExerciseModal(true)}
         >
-          Lista de Exercícios
+          Adicionar Exercício
         </button>
-
-        <TreinoTabs
-          active={activeTreino}
-          onChange={(t) => setActiveTreino(t)}
-        />
-
-        <TreinoList
-          treino={activeTreino}
-          reload={reloadTreino}
-          onOpenGif={(url) => {
-            setGifUrl(url);
-            setShowGifModal(true);
-          }}
-        />
       </div>
+
+      <TreinoList
+        treino={activeTreino}
+        items={treinos[activeTreino]}
+        removeExercise={removeExercise}
+        updateExercise={updateExercise}
+        onOpenGif={(url: string) => {
+          setGifUrl(url);
+          setShowGifModal(true);
+        }}
+      />
 
       {showExerciseModal && (
         <ExerciseModal
           onClose={() => setShowExerciseModal(false)}
-          onSelectExercise={(ex) => {
-            setSelectedExercise(ex);
-            setShowChooseModal(true);
-          }}
-          onOpenGif={(url) => {
+          onSelectExercise={handleAddExercise}
+          onOpenGif={(url: string) => {
             setGifUrl(url);
             setShowGifModal(true);
           }}
         />
       )}
 
-      {showGifModal && gifUrl && (
-        <GifModal
-          url={gifUrl}
-          onClose={() => {
-            setGifUrl(null);
-            setShowGifModal(false);
-          }}
-        />
+      {showGifModal && (
+        <GifModal url={gifUrl} onClose={() => setShowGifModal(false)} />
       )}
 
-      {showChooseModal && (
+      {showChooseTreinoModal && (
         <ChooseTreinoModal
-          exercise={selectedExercise}
-          onClose={() => setShowChooseModal(false)}
-          onAdded={() => setReloadTreino(prev => prev + 1)}
+          exercise={exerciseToAdd}
+          onClose={() => setShowChooseTreinoModal(false)}
+          onAdded={addToTreino}
         />
       )}
-
-    </main>
+    </div>
   );
 }

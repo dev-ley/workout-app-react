@@ -1,0 +1,28 @@
+.treino-tabs {
+  display: flex;
+  gap: 12px;
+  padding: 12px;
+  margin-bottom: 24px;
+}
+
+.treino-tab {
+  flex: 1;
+  padding: 12px;
+  background: var(--glass);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  color: var(--text-muted);
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+.treino-tab.active {
+  background: var(--accent);
+  color: white;
+  border-color: transparent;
+}
+
+.treino-tab:hover {
+  background: var(--accent-hover);
+  color: white;
+}

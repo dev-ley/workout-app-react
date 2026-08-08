@@ -10,11 +10,6 @@ import {
   initializeFirestore,
   persistentLocalCache,
   persistentMultipleTabManager,
-  doc,
-  getDoc,
-  setDoc,
-  updateDoc,
-  arrayUnion,
 } from "firebase/firestore";
 
 // ===============================
@@ -56,56 +51,4 @@ export function loginWithGoogle() {
 // ===============================
 export function loginWithEmail(email: string, password: string) {
   return signInWithEmailAndPassword(auth, email, password);
-}
-
-// ===============================
-// CARREGAR TREINO DO FIRESTORE
-// ===============================
-export async function loadTreino(treino: "A" | "B" | "C") {
-  const user = auth.currentUser;
-  if (!user) return [];
-
-  const ref = doc(db, "users", user.uid, "treinos", `treino${treino}`);
-  const snap = await getDoc(ref);
-
-  if (!snap.exists()) return [];
-
-  return snap.data().exercicios || [];
-}
-
-// ===============================
-// SALVAR EXERCÍCIO NO TREINO
-// ===============================
-export async function addExerciseToTreino(
-  treino: "A" | "B" | "C",
-  exercise: any
-) {
-  const user = auth.currentUser;
-  if (!user) return;
-
-  const ref = doc(db, "users", user.uid, "treinos", `treino${treino}`);
-  const snap = await getDoc(ref);
-
-  if (!snap.exists()) {
-    await setDoc(ref, { exercicios: [] });
-  }
-
-  await updateDoc(ref, {
-    exercicios: arrayUnion(exercise),
-  });
-}
-
-// ===============================
-// REMOVER EXERCÍCIO DO TREINO
-// ===============================
-export async function removeExerciseFromTreino(
-  treino: "A" | "B" | "C",
-  exercicios: any[]
-) {
-  const user = auth.currentUser;
-  if (!user) return;
-
-  const ref = doc(db, "users", user.uid, "treinos", `treino${treino}`);
-
-  await updateDoc(ref, { exercicios });
 }
