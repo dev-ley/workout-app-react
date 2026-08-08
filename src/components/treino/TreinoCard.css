@@ -23,38 +23,52 @@
   color: var(--text);
 }
 
-/* AÇÕES */
-.treino-actions {
-  display: flex;
-  gap: 10px;
+.treino-info p {
+  font-size: 14px;
+  color: var(--text-muted);
 }
 
-.treino-actions button {
-  background: transparent;
-  border: none;
-  font-size: 20px;
+/* GIF CONTAINER */
+.treino-gif-container {
+  position: relative;
+  width: 48%;
+  height: 120px;
+  border-radius: var(--radius);
+  overflow: hidden;
+  flex-shrink: 0;
+}
+
+/* GIF OCUPA TODA A DIV */
+.treino-gif {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: var(--radius);
+  cursor: pointer;
+  transition: var(--transition);
+}
+
+.treino-gif:hover {
+  transform: scale(1.05);
+}
+
+/* BOTÃO EDITAR FIXO NO CANTO SUPERIOR DIREITO */
+.edit-btn {
+  position: absolute;
+  top: 6px;
+  right: 6px;
+  background: var(--glass-strong);
+  border: 1px solid var(--border);
   color: var(--text);
+  padding: 4px 6px;
+  border-radius: 50%;
+  font-size: 12px;
   cursor: pointer;
   transition: var(--transition);
+  box-shadow: var(--shadow);
 }
 
-.treino-actions button:hover {
-  transform: scale(1.2);
-}
-
-/* BOTÃO REMOVER */
-.remove-btn {
-  background: rgba(255, 0, 0, 0.15);
-  border: 1px solid rgba(255, 0, 0, 0.35);
-  color: var(--danger);
-  padding: 8px;
-  border-radius: var(--radius-sm);
-  cursor: pointer;
-  font-size: 18px;
-  transition: var(--transition);
-}
-
-.remove-btn:hover {
-  background: rgba(255, 0, 0, 0.25);
+.edit-btn:hover {
+  background: var(--gradient-accent);
   transform: scale(1.1);
 }

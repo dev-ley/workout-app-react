@@ -25,6 +25,8 @@ export function TreinoCard({
   return (
     <>
       <div className="treino-card glass">
+        
+        {/* LADO ESQUERDO */}
         <div className="treino-info">
           <h3>{item.name}</h3>
           <p>
@@ -32,21 +34,20 @@ export function TreinoCard({
           </p>
         </div>
 
-        <div className="treino-actions">
+        {/* LADO DIREITO — GIF + BOTÃO EDITAR */}
+        <div className="treino-gif-container">
           {item.gif && (
-            <button className="gif-btn" onClick={() => onOpenGif(item.gif!)}>
-              👀
-            </button>
+            <img
+              src={item.gif}
+              alt={item.name}
+              className="treino-gif"
+              onClick={() => onOpenGif(item.gif!)}
+            />
           )}
 
           <button className="edit-btn" onClick={() => setOpenModal(true)}>
             ✏️
           </button>
-
-          <button className="remove-btn" onClick={onRemove}>
-            ❌
-          </button>
-
         </div>
       </div>
 
@@ -56,8 +57,9 @@ export function TreinoCard({
           onClose={() => setOpenModal(false)}
           onSave={(updated) => {
             onUpdate(treino, index, updated);
-            setOpenModal(false); // <-- FECHA O MODAL
+            setOpenModal(false);
           }}
+          onRemove={onRemove}
         />
       )}
     </>

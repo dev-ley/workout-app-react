@@ -6,9 +6,10 @@ type EditExerciseModalProps = {
   item: TreinoItem;
   onClose: () => void;
   onSave: (updated: TreinoItem) => void;
+  onRemove: () => void;
 };
 
-export function EditExerciseModal({ item, onClose, onSave }: EditExerciseModalProps) {
+export function EditExerciseModal({ item, onClose, onSave, onRemove }: EditExerciseModalProps) {
   const [localItem, setLocalItem] = useState({
     ...item,
     series: String(item.series),
@@ -57,6 +58,7 @@ export function EditExerciseModal({ item, onClose, onSave }: EditExerciseModalPr
         <div className="modal-actions">
           <button className="cancel-btn" onClick={onClose}>Cancelar</button>
           <button className="save-btn" onClick={handleSave}>Salvar</button>
+          <button className="remove-btn" onClick={onRemove}>Remover Exercício</button>
         </div>
       </div>
     </div>
