@@ -8,12 +8,10 @@ type Props = {
 };
 
 export function ExerciciosPage({ onSelectExercise, onOpenGif }: Props) {
-  const { exercises, categories, category, setCategory, loading } =
-    useExercises();
+  const { exercises, categories, category, setCategory, loading } = useExercises();
 
   return (
     <div className="ex-page">
-
       {/* SELECT DE CATEGORIAS */}
       <div className="ex-select-container glass">
         <label className="ex-select-label">Filtrar por categoria:</label>
@@ -24,7 +22,7 @@ export function ExerciciosPage({ onSelectExercise, onOpenGif }: Props) {
           onChange={(e) => setCategory(e.target.value)}
         >
           {categories.map((c) => (
-            <option key={c} value={c}>
+            <option key={c} value={c} className="ex-option">
               {c.toUpperCase()}
             </option>
           ))}
