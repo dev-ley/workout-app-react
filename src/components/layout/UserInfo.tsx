@@ -10,7 +10,6 @@ export function UserInfo() {
 
       <div className="user-text">
         <h2>{user.displayName}</h2>
-        <p>{user.email}</p>
       </div>
 
       <button className="logout" onClick={logout}>
