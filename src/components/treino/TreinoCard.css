@@ -10,6 +10,7 @@
   box-shadow: var(--shadow);
   backdrop-filter: blur(14px);
   transition: var(--transition);
+  position: relative;
 }
 
 .treino-card:hover {
@@ -71,4 +72,33 @@
 .edit-btn:hover {
   background: var(--gradient-accent);
   transform: scale(1.1);
+}
+
+/* CHECKBOX FIXO NO CANTO INFERIOR ESQUERDO */
+.feito-checkbox {
+  position: absolute;
+  bottom: 6px;
+  left: 6px;
+  width: 18px;
+  height: 18px;
+  accent-color: var(--accent);
+  cursor: pointer;
+  border-radius: 50%;
+  box-shadow: var(--shadow);
+  transition: var(--transition);
+}
+
+.feito-checkbox:hover {
+  transform: scale(1.1);
+}
+
+/* ESTILO QUANDO MARCADO */
+.feito {
+  opacity: 0.8;
+  filter: grayscale(0.4);
+}
+
+.feito-texto {
+  text-decoration: line-through;
+  color: var(--text-muted);
 }

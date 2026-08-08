@@ -1,5 +1,5 @@
 import "./TreinoCard.css";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import type { TreinoItem } from "../../hooks/useTreinos";
 import { EditExerciseModal } from "./EditExerciseModal";
 
@@ -22,19 +22,48 @@ export function TreinoCard({
 }: TreinoCardProps) {
   const [openModal, setOpenModal] = useState(false);
 
+  // chave única para cada exercício
+  const storageKey = `feito_${treino}_${item.name}_${index}`;
+
+  const [feito, setFeito] = useState(false);
+
+  // carregar estado salvo
+  useEffect(() => {
+    const saved = localStorage.getItem(storageKey);
+    if (saved === "true") {
+      setFeito(true);
+    }
+  }, []);
+
+  // salvar estado sempre que mudar
+  function toggleFeito() {
+    const novoEstado = !feito;
+    setFeito(novoEstado);
+    localStorage.setItem(storageKey, String(novoEstado));
+  }
+
   return (
     <>
-      <div className="treino-card glass">
+      <div className={`treino-card glass ${feito ? "feito" : ""}`}>
         
         {/* LADO ESQUERDO */}
         <div className="treino-info">
-          <h3>{item.name}</h3>
-          <p>
+          <h3 className={feito ? "feito-texto" : ""}>{item.name}</h3>
+          <p className={feito ? "feito-texto" : ""}>
             {item.series} séries • {item.reps} reps • {item.peso ?? 0} kg
           </p>
+
+          {/* CHECKBOX */}
+          <input
+            type="checkbox"
+            className="feito-checkbox"
+            checked={feito}
+            onChange={toggleFeito}
+            title="Marcar como feito"
+          />
         </div>
 
-        {/* LADO DIREITO — GIF + BOTÃO EDITAR */}
+        {/* GIF + EDITAR */}
         <div className="treino-gif-container">
           {item.gif && (
             <img

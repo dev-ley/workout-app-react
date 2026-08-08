@@ -47,7 +47,11 @@ export function Header({ activeTab, onChangeTab }: HeaderProps) {
         <div className="banner-text">
           <h2>Hora de Treinar!</h2>
           <p>Supere os seus limites.</p>
-          <button className="btn-start">INICIAR TREINO</button>
+
+          {/* AQUI: botão agora muda para a aba de treinos */}
+          <button className="btn-start" onClick={() => onChangeTab("treinos")}>
+            INICIAR TREINO
+          </button>
         </div>
       </div>
 
