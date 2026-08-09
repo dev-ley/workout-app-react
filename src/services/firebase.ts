@@ -65,9 +65,15 @@ export const messaging = getMessaging(app);
  */
 export async function getFCMToken() {
   try {
+    // REGISTRA O SERVICE WORKER CORRETAMENTE
+    const registration = await navigator.serviceWorker.register(
+      "/firebase-messaging-sw.js"
+    );
+
     const token = await getToken(messaging, {
       vapidKey:
         "BMxMYhn69KjrxqX6Tn8vQgUO1E-1i78P-KQ3LSpA9svTPTrEIwFSHACsiqvtPMp29dAJ3Foqmqs68alXiRToWU8",
+      serviceWorkerRegistration: registration,
     });
 
     console.log("Token FCM:", token);

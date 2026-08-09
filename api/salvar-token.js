@@ -1,32 +1,25 @@
-import admin from "firebase-admin";
+import { initializeApp, cert } from "firebase-admin/app";
+import { getFirestore } from "firebase-admin/firestore";
 
-if (!admin.apps.length) {
-  admin.initializeApp({
-    credential: admin.credential.cert({
-      projectId: process.env.FIREBASE_PROJECT_ID,
-      clientEmail: process.env.FIREBASE_CLIENT_EMAIL,
-      privateKey: process.env.FIREBASE_PRIVATE_KEY.replace(/\\n/g, "\n"),
-    }),
-  });
-}
+const app = initializeApp({
+  credential: cert({
+    project_id: process.env.FIREBASE_PROJECT_ID,
+    client_email: process.env.FIREBASE_CLIENT_EMAIL,
+    private_key: process.env.FIREBASE_PRIVATE_KEY.replace(/\\n/g, "\n"),
+  }),
+});
 
-const db = admin.firestore();
+const db = getFirestore(app);
 
 export default async function handler(req, res) {
-  if (req.method !== "POST") {
+  if (req.method !== "POST")
     return res.status(405).json({ error: "Método não permitido" });
-  }
 
   const { token } = req.body;
 
-  if (!token) {
-    return res.status(400).json({ error: "Token não enviado" });
-  }
+  if (!token) return res.status(400).json({ error: "Token ausente" });
 
-  await db.collection("tokens").doc(token).set({
-    token,
-    createdAt: admin.firestore.FieldValue.serverTimestamp(),
-  });
+  await db.collection("tokens").doc(token).set({ token });
 
   return res.status(200).json({ ok: true });
 }

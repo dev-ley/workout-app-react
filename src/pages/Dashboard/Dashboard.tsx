@@ -11,7 +11,6 @@ import { ExerciciosPage } from "../../components/exercise/ExerciciosPage";
 
 import { useTreinos } from "../../hooks/useTreinos";
 
-// IMPORTA O FCM
 import { getFCMToken } from "../../services/firebase";
 
 export default function Dashboard() {
@@ -42,7 +41,6 @@ export default function Dashboard() {
         return;
       }
 
-      // Salva token no backend (Vercel)
       await fetch("/api/salvar-token", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
@@ -79,17 +77,14 @@ export default function Dashboard() {
     <div className="dashboard">
       <Header activeTab={activeTab} onChangeTab={setActiveTab} />
 
-      {/* BOTÃO DE ATIVAR NOTIFICAÇÕES */}
       <div className="dashboard-actions">
         <button className="notify-btn" onClick={ativarNotificacoes}>
           🔔 Ativar Notificações
         </button>
       </div>
 
-      {/* ========================= TREINOS ========================= */}
       {activeTab === "treinos" && (
         <>
-          {/* TREINO A / B / C */}
           <div className="treino-selector glass">
             {(["A", "B", "C"] as const).map((t) => (
               <button
@@ -102,7 +97,6 @@ export default function Dashboard() {
             ))}
           </div>
 
-          {/* BOTÃO ADICIONAR */}
           <div className="dashboard-actions">
             <button
               className="open-exercise-btn"
@@ -112,7 +106,6 @@ export default function Dashboard() {
             </button>
           </div>
 
-          {/* LISTA DO TREINO ATIVO */}
           <TreinoList
             treino={activeTreino}
             items={treinos[activeTreino]}
@@ -126,7 +119,6 @@ export default function Dashboard() {
         </>
       )}
 
-      {/* ========================= EXERCÍCIOS ========================= */}
       {activeTab === "exercicios" && (
         <ExerciciosPage
           onSelectExercise={handleAddExercise}
@@ -137,7 +129,6 @@ export default function Dashboard() {
         />
       )}
 
-      {/* ========================= DIETA ========================= */}
       {activeTab === "dieta" && (
         <div className="placeholder glass">
           <h2>🍎 Área de Dieta</h2>
@@ -145,7 +136,6 @@ export default function Dashboard() {
         </div>
       )}
 
-      {/* ========================= PROGRESSO ========================= */}
       {activeTab === "progresso" && (
         <div className="placeholder glass">
           <h2>📈 Progresso</h2>
@@ -153,7 +143,6 @@ export default function Dashboard() {
         </div>
       )}
 
-      {/* ========================= MODAIS ========================= */}
       {showExerciseModal && (
         <ExerciseModal
           onClose={() => setShowExerciseModal(false)}
