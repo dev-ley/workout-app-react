@@ -11,6 +11,9 @@ import { ExerciciosPage } from "../../components/exercise/ExerciciosPage";
 
 import { useTreinos } from "../../hooks/useTreinos";
 
+// IMPORTA O FCM
+import { getFCMToken } from "../../services/firebase";
+
 export default function Dashboard() {
   const [activeTab, setActiveTab] = useState<
     "treinos" | "exercicios" | "dieta" | "progresso"
@@ -26,6 +29,32 @@ export default function Dashboard() {
 
   const [exerciseToAdd, setExerciseToAdd] = useState<any | null>(null);
   const [showChooseTreinoModal, setShowChooseTreinoModal] = useState(false);
+
+  // ==========================
+  // ATIVAR NOTIFICAÇÕES
+  // ==========================
+  async function ativarNotificacoes() {
+    try {
+      const token = await getFCMToken();
+
+      if (!token) {
+        alert("Não foi possível gerar o token de notificações.");
+        return;
+      }
+
+      // Salva token no backend (Vercel)
+      await fetch("/api/salvar-token", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ token }),
+      });
+
+      alert("Notificações ativadas com sucesso!");
+    } catch (err) {
+      console.error("Erro ao ativar notificações:", err);
+      alert("Erro ao ativar notificações.");
+    }
+  }
 
   function handleAddExercise(exercise: any) {
     setExerciseToAdd(exercise);
@@ -49,6 +78,13 @@ export default function Dashboard() {
   return (
     <div className="dashboard">
       <Header activeTab={activeTab} onChangeTab={setActiveTab} />
+
+      {/* BOTÃO DE ATIVAR NOTIFICAÇÕES */}
+      <div className="dashboard-actions">
+        <button className="notify-btn" onClick={ativarNotificacoes}>
+          🔔 Ativar Notificações
+        </button>
+      </div>
 
       {/* ========================= TREINOS ========================= */}
       {activeTab === "treinos" && (

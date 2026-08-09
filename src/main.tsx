@@ -12,3 +12,13 @@ ReactDOM.createRoot(document.getElementById("root")!).render(
     </AuthProvider>
   </React.StrictMode>
 );
+
+// ===== REGISTRO DO SERVICE WORKER =====
+if ("serviceWorker" in navigator) {
+  window.addEventListener("load", () => {
+    navigator.serviceWorker
+      .register("/sw.js")
+      .then(() => console.log("Service Worker registrado com sucesso"))
+      .catch((err) => console.log("Erro ao registrar o Service Worker:", err));
+  });
+}

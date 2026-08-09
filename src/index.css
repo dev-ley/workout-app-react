@@ -48,3 +48,39 @@ body {
   padding: 0;
   box-sizing: border-box;
 }
+
+/* ===== BLOQUEIO PARA DESKTOP (GLASS PREMIUM) ===== */
+@media (min-width: 768px) {
+  .login-card {
+    display: none !important;
+  }
+
+  .login-page {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: var(--gradient-dark);
+    color: var(--text);
+    padding: 22px;
+  }
+
+  .login-page::after {
+    content: "Disponível apenas para Mobile";
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+
+    width: 100%;
+    max-width: 420px;
+    padding: 32px;
+
+    border-radius: var(--radius);
+    backdrop-filter: blur(22px);
+    background: var(--glass-strong);
+    border: 1px solid var(--border);
+    box-shadow: var(--shadow);
+
+    font-size: 1.4rem;
+  }
+}

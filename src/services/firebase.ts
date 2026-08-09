@@ -12,6 +12,8 @@ import {
   persistentMultipleTabManager,
 } from "firebase/firestore";
 
+import { getMessaging, getToken } from "firebase/messaging";
+
 // ===============================
 // CONFIGURAÇÃO DO FIREBASE
 // ===============================
@@ -51,4 +53,27 @@ export function loginWithGoogle() {
 // ===============================
 export function loginWithEmail(email: string, password: string) {
   return signInWithEmailAndPassword(auth, email, password);
+}
+
+// ===============================
+// FIREBASE CLOUD MESSAGING (FCM)
+// ===============================
+export const messaging = getMessaging(app);
+
+/**
+ * Gera o token FCM do usuário usando a VAPID Public Key
+ */
+export async function getFCMToken() {
+  try {
+    const token = await getToken(messaging, {
+      vapidKey:
+        "BMxMYhn69KjrxqX6Tn8vQgUO1E-1i78P-KQ3LSpA9svTPTrEIwFSHACsiqvtPMp29dAJ3Foqmqs68alXiRToWU8",
+    });
+
+    console.log("Token FCM:", token);
+    return token;
+  } catch (err) {
+    console.error("Erro ao gerar token FCM:", err);
+    return null;
+  }
 }
