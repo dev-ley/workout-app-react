@@ -14,7 +14,7 @@ export function useExercises() {
   const [loading, setLoading] = useState(true);
 
   const categories = useMemo(
-    () => ["Peito", "Costas", "Pernas", "Ombros", "Biceps" ,"Tríceps"],
+    () => ["Peito", "Ombros", "Trapézio", "Costas","Bíceps", "Tríceps", "Antebraço", "Pernas", "Panturrilha", "Abdômen"],
     []
   );
 
