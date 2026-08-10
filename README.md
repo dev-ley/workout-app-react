@@ -1,5 +1,5 @@
 💪 Meu Treino — Workout App (React + TypeScript + Firebase + PWA)
-Meu Treino é um aplicativo moderno desenvolvido em React + TypeScript, projetado para ajudar usuários a organizar e acompanhar seus treinos de forma simples, rápida e intuitiva.
+Meu treino é um aplicativo moderno desenvolvido em React + TypeScript, projetado para ajudar usuários a organizar e acompanhar seus treinos de forma simples, rápida e intuitiva.
 O app permite criar treinos personalizados (A, B e C), adicionar exercícios com GIFs demonstrativos, registrar séries, repetições e cargas, além de salvar tudo automaticamente no Firestore e no localStorage.
 
 🚀 Tecnologias Utilizadas
