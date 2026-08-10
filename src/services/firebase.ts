@@ -49,7 +49,7 @@ export function loginWithGoogle() {
 }
 
 // ===============================
-// LOGIN EMAIL / SENHA
+// LOGIN EMAIL / SENHA (CORRIGIDO)
 // ===============================
 export function loginWithEmail(email: string, password: string) {
   return signInWithEmailAndPassword(auth, email, password);
@@ -62,10 +62,10 @@ export const messaging = getMessaging(app);
 
 /**
  * Gera o token FCM do usuário usando a VAPID Public Key
+ * e envia para o backend /api/salvar-token
  */
 export async function getFCMToken() {
   try {
-    // REGISTRA O SERVICE WORKER CORRETAMENTE
     const registration = await navigator.serviceWorker.register(
       "/firebase-messaging-sw.js"
     );
@@ -77,6 +77,17 @@ export async function getFCMToken() {
     });
 
     console.log("Token FCM:", token);
+
+    if (!token) return null;
+
+    await fetch("/api/salvar-token", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ token }),
+    });
+
+    console.log("Token enviado para o backend!");
+
     return token;
   } catch (err) {
     console.error("Erro ao gerar token FCM:", err);
