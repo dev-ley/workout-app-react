@@ -1,104 +1,227 @@
 .treino-card {
+  position: relative;
   display: flex;
-  justify-content: space-between;
   align-items: center;
-  padding: 16px;
-  margin-bottom: 12px;
-  background: var(--glass);
+  justify-content: space-between;
+  gap: 24px;
+  width: 100%;
+  min-width: 0;
+  padding: 20px;
+  margin-bottom: 16px;
   border: 1px solid var(--border);
   border-radius: var(--radius);
+  background: rgba(255, 255, 255, 0.045);
   box-shadow: var(--shadow);
   backdrop-filter: blur(14px);
-  transition: var(--transition);
-  position: relative;
+  -webkit-backdrop-filter: blur(14px);
+  transition:
+    border-color 0.2s ease,
+    background 0.2s ease,
+    transform 0.2s ease;
 }
 
 .treino-card:hover {
-  transform: scale(1.02);
+  border-color: rgba(155, 125, 255, 0.35);
+  background: rgba(255, 255, 255, 0.065);
 }
 
-/* INFO */
+.treino-info {
+  flex: 1 1 0;
+  min-width: 0;
+}
+
 .treino-info h3 {
-  margin: 0;
-  font-size: 18px;
+  margin: 0 0 8px;
   color: var(--text);
+  font-size: clamp(1rem, 1.5vw, 1.2rem);
+  font-weight: 700;
+  line-height: 1.4;
+  overflow-wrap: anywhere;
 }
 
 .treino-info p {
-  font-size: 14px;
+  margin: 0;
   color: var(--text-muted);
+  font-size: 0.9rem;
+  line-height: 1.7;
 }
 
-/* GIF CONTAINER */
 .treino-gif-container {
   position: relative;
-  width: 48%;
-  height: 120px;
-  border-radius: var(--radius);
+  flex: 0 1 36%;
+  width: 36%;
+  max-width: 360px;
+  min-width: 150px;
+  height: 150px;
   overflow: hidden;
-  flex-shrink: 0;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  background: var(--bg-light);
 }
 
-/* GIF OCUPA TODA A DIV */
 .treino-gif {
+  display: block;
   width: 100%;
   height: 100%;
   object-fit: cover;
-  border-radius: var(--radius);
   cursor: pointer;
-  transition: var(--transition);
+  transition: transform 0.25s ease;
 }
 
 .treino-gif:hover {
-  transform: scale(1.05);
+  transform: scale(1.04);
 }
 
-/* BOTÃO EDITAR FIXO NO CANTO SUPERIOR DIREITO */
 .edit-btn {
   position: absolute;
-  top: 6px;
-  right: 6px;
-  background: var(--glass-strong);
+  top: 8px;
+  right: 8px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 38px;
+  height: 38px;
+  padding: 0;
   border: 1px solid var(--border);
-  color: var(--text);
-  padding: 4px 6px;
   border-radius: 50%;
-  font-size: 12px;
+  background: rgba(15, 15, 15, 0.78);
+  color: var(--text);
+  font-size: 1rem;
   cursor: pointer;
-  transition: var(--transition);
-  box-shadow: var(--shadow);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  transition:
+    background 0.2s ease,
+    transform 0.2s ease;
 }
 
 .edit-btn:hover {
-  background: var(--gradient-accent);
-  transform: scale(1.1);
+  background: var(--accent);
+  transform: scale(1.05);
 }
 
-/* CHECKBOX FIXO NO CANTO INFERIOR ESQUERDO */
+.edit-btn:focus-visible {
+  outline: 2px solid var(--accent-hover);
+  outline-offset: 3px;
+}
+
+/* CHECKBOX */
+
 .feito-checkbox {
-  position: absolute;
-  bottom: 6px;
-  left: 6px;
-  width: 18px;
-  height: 18px;
+  display: block;
+  width: 22px;
+  height: 22px;
+  margin: 16px 0 0;
   accent-color: var(--accent);
   cursor: pointer;
-  border-radius: 50%;
-  box-shadow: var(--shadow);
-  transition: var(--transition);
 }
 
-.feito-checkbox:hover {
-  transform: scale(1.1);
+.feito-checkbox:focus-visible {
+  outline: 2px solid var(--accent-hover);
+  outline-offset: 4px;
 }
 
-/* ESTILO QUANDO MARCADO */
-.feito {
-  opacity: 0.8;
-  filter: grayscale(0.4);
+/* EXERCÍCIO CONCLUÍDO */
+
+.treino-card.feito {
+  border-color: rgba(76, 175, 80, 0.4);
+  background: rgba(76, 175, 80, 0.055);
 }
 
-.feito-texto {
-  text-decoration: line-through;
+.treino-card.feito .feito-texto {
   color: var(--text-muted);
+  text-decoration: line-through;
+  text-decoration-color: rgba(255, 255, 255, 0.4);
+}
+
+.treino-card.feito .feito-checkbox {
+  accent-color: var(--success);
+}
+
+/* TABLETS */
+
+@media (max-width: 768px) {
+  .treino-card {
+    gap: 16px;
+    padding: 16px;
+  }
+
+  .treino-gif-container {
+    flex-basis: 34%;
+    width: 34%;
+    min-width: 130px;
+    height: 125px;
+  }
+}
+
+/* TELEMÓVEIS */
+
+@media (max-width: 480px) {
+  .treino-card {
+    gap: 12px;
+    padding: 12px;
+    margin-bottom: 12px;
+    border-radius: 12px;
+  }
+
+  .treino-info h3 {
+    margin-bottom: 6px;
+    font-size: 0.95rem;
+  }
+
+  .treino-info p {
+    font-size: 0.78rem;
+    line-height: 1.6;
+  }
+
+  .treino-gif-container {
+    flex: 0 0 112px;
+    width: 112px;
+    min-width: 112px;
+    height: 112px;
+  }
+
+  .edit-btn {
+    top: 5px;
+    right: 5px;
+    width: 32px;
+    height: 32px;
+    font-size: 0.85rem;
+  }
+
+  .feito-checkbox {
+    width: 22px;
+    height: 22px;
+    margin-top: 12px;
+  }
+}
+
+@media (max-width: 350px) {
+  .treino-card {
+    gap: 8px;
+    padding: 9px;
+  }
+
+  .treino-gif-container {
+    flex-basis: 88px;
+    width: 88px;
+    min-width: 88px;
+    height: 100px;
+  }
+
+  .treino-info h3 {
+    font-size: 0.85rem;
+  }
+
+  .treino-info p {
+    font-size: 0.72rem;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .treino-card,
+  .treino-gif,
+  .edit-btn {
+    transition: none;
+  }
 }

@@ -1,11 +1,32 @@
-import { db } from "./firebase";
+
 import { collection, getDocs } from "firebase/firestore";
+import { db } from "./firebase";
 
-export async function loadExercises() {
-  const snap = await getDocs(collection(db, "exercises"));
-  const list: any[] = [];
+export type Exercise = {
+  name: string;
+  category: string;
+  gif: string;
+};
 
-  snap.forEach((doc) => list.push(doc.data()));
+export async function loadExercises(): Promise<Exercise[]> {
+  const snapshot = await getDocs(collection(db, "exercises"));
 
-  return list;
+  return snapshot.docs
+    .map((document) => {
+      const data = document.data();
+
+      if (
+        typeof data.name !== "string" ||
+        typeof data.category !== "string"
+      ) {
+        return null;
+      }
+
+      return {
+        name: data.name,
+        category: data.category,
+        gif: typeof data.gif === "string" ? data.gif : "",
+      };
+    })
+    .filter((exercise): exercise is Exercise => exercise !== null);
 }

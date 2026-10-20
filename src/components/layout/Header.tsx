@@ -3,9 +3,11 @@ import { useEffect, useState } from "react";
 import { getAuth, signOut } from "firebase/auth";
 import { MainNav } from "./MainNav";
 
+type Tab = "treinos" | "exercicios" | "dieta" | "progresso";
+
 type HeaderProps = {
-  activeTab: "treinos" | "exercicios" | "dieta" | "progresso";
-  onChangeTab: (tab: "treinos" | "exercicios" | "dieta" | "progresso") => void;
+  activeTab: Tab;
+  onChangeTab: (tab: Tab) => void;
 };
 
 export function Header({ activeTab, onChangeTab }: HeaderProps) {
@@ -13,49 +15,66 @@ export function Header({ activeTab, onChangeTab }: HeaderProps) {
 
   useEffect(() => {
     const auth = getAuth();
-    const unsubscribe = auth.onAuthStateChanged((u) => setUser(u));
+
+    const unsubscribe = auth.onAuthStateChanged((currentUser) => {
+      setUser(currentUser);
+    });
+
     return () => unsubscribe();
   }, []);
 
   const firstName = user?.displayName?.split(" ")[0] || "Usuário";
 
-  function handleLogout() {
-    signOut(getAuth());
+  async function handleLogout() {
+    try {
+      await signOut(getAuth());
+    } catch (error) {
+      console.error("Erro ao terminar a sessão:", error);
+    }
   }
 
   return (
     <header className="header">
-
-      {/* PARTE SUPERIOR */}
       <div className="header-top">
         <div className="header-user">
           <img
             src={user?.photoURL || "/images/default-avatar.png"}
-            alt={firstName}
+            alt={`Foto de perfil de ${firstName}`}
             className="header-avatar"
+            referrerPolicy="no-referrer"
           />
-          <h1>Bem-vindo, {firstName}</h1>
+
+          <div className="header-greeting">
+            <span className="header-greeting-label">Bem-vindo</span>
+            <h1>{firstName}</h1>
+          </div>
         </div>
 
-        <button className="logout-btn" onClick={handleLogout}>
+        <button
+          type="button"
+          className="logout-btn"
+          onClick={handleLogout}
+          aria-label="Terminar sessão"
+        >
           Sair
         </button>
       </div>
 
-      {/* BANNER */}
-      <div className="header-banner">
+      <section className="header-banner" aria-label="Início do treino">
         <div className="banner-text">
           <h2>Hora de Treinar!</h2>
           <p>Supere os seus limites.</p>
 
-          {/* AQUI: botão agora muda para a aba de treinos */}
-          <button className="btn-start" onClick={() => onChangeTab("treinos")}>
+          <button
+            type="button"
+            className="btn-start"
+            onClick={() => onChangeTab("treinos")}
+          >
             INICIAR TREINO
           </button>
         </div>
-      </div>
+      </section>
 
-      {/* NAVEGAÇÃO PRINCIPAL */}
       <MainNav active={activeTab} onChange={onChangeTab} />
     </header>
   );

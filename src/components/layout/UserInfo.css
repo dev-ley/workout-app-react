@@ -2,35 +2,49 @@
   display: flex;
   align-items: center;
   gap: 14px;
+  width: 100%;
+  min-width: 0;
   padding: 14px 18px;
   border-radius: var(--radius);
   backdrop-filter: blur(22px);
+  -webkit-backdrop-filter: blur(22px);
   background: var(--glass);
   border: 1px solid var(--border);
   box-shadow: var(--shadow);
 }
 
-/* AVATAR */
 .avatar {
+  display: block;
+  flex: 0 0 52px;
   width: 52px;
   height: 52px;
-  border-radius: 999px;
+  border-radius: 50%;
   border: 2px solid var(--border);
+  object-fit: cover;
+  background: var(--bg-light);
 }
 
-/* TEXTO DO USUÁRIO */
+.user-text {
+  flex: 1;
+  min-width: 0;
+}
+
 .user-text h2 {
+  margin: 0;
+  overflow-wrap: anywhere;
   font-size: 1rem;
+  line-height: 1.4;
   color: var(--text);
 }
 
 .user-text p {
+  margin: 4px 0 0;
   font-size: 0.8rem;
   color: var(--text-muted);
 }
 
-/* BOTÃO LOGOUT */
 .logout {
+  flex: 0 0 auto;
   margin-left: auto;
   padding: 8px 14px;
   border-radius: 999px;
@@ -43,4 +57,26 @@
 
 .logout:hover {
   background: rgba(255, 255, 255, 0.22);
+}
+
+.logout:focus-visible {
+  outline: 2px solid var(--accent-hover);
+  outline-offset: 3px;
+}
+
+@media (max-width: 480px) {
+  .user-info {
+    gap: 10px;
+    padding: 12px;
+  }
+
+  .avatar {
+    flex-basis: 44px;
+    width: 44px;
+    height: 44px;
+  }
+
+  .logout {
+    padding: 8px 12px;
+  }
 }

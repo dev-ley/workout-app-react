@@ -1,3 +1,4 @@
+
 import "./ExerciseList.css";
 import { ExerciseCard } from "./ExerciseCard";
 
@@ -18,14 +19,25 @@ export function ExerciseList({
   onSelectExercise,
   onOpenGif,
 }: ExerciseListProps) {
+  if (exercises.length === 0) {
+    return (
+      <div className="exercise-list-empty">
+        <h3>Nenhum exercício disponível</h3>
+        <p>Experimenta selecionar outra categoria.</p>
+      </div>
+    );
+  }
+
   return (
     <div className="exercise-list">
-      {exercises.map((ex) => (
+      {exercises.map((exercise) => (
         <ExerciseCard
-          key={ex.name}
-          exercise={ex}
-          onSelect={() => onSelectExercise(ex)}
-          onOpenGif={() => onOpenGif(ex.gif)}
+          key={exercise.name}
+          exercise={exercise}
+          onSelect={() => onSelectExercise(exercise)}
+          onOpenGif={() => {
+            if (exercise.gif) onOpenGif(exercise.gif);
+          }}
         />
       ))}
     </div>

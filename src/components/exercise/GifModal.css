@@ -1,18 +1,169 @@
-.gif-modal {
+
+.gif-modal-backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 1100;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   padding: 22px;
-  border-radius: var(--radius);
-  background: var(--glass-strong);
-  border: 1px solid var(--border);
-  box-shadow: var(--shadow);
-  max-width: 720px;
-  backdrop-filter: blur(18px);
-  color: var(--text);
+  overflow-y: auto;
+  background: rgba(4, 4, 10, 0.84);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
 }
 
-/* IMAGEM DO GIF */
+.gif-modal-panel {
+  display: flex;
+  width: min(100%, 900px);
+  max-height: 92vh;
+  flex-direction: column;
+  overflow: hidden;
+  border: 1px solid var(--border);
+  border-radius: 20px;
+  color: var(--text);
+  background: #15151d;
+  box-shadow: 0 24px 80px rgba(0, 0, 0, 0.55);
+}
+
+.gif-modal-header {
+  display: flex;
+  flex-shrink: 0;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 19px 23px;
+  border-bottom: 1px solid var(--border);
+}
+
+.gif-modal-eyebrow {
+  display: block;
+  margin-bottom: 5px;
+  color: var(--accent-hover);
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: 1.5px;
+}
+
+.gif-modal-header h2 {
+  margin: 0;
+  font-size: 20px;
+  font-weight: 750;
+}
+
+.gif-modal-close {
+  display: flex;
+  width: 40px;
+  height: 40px;
+  flex-shrink: 0;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid var(--border);
+  border-radius: 11px;
+  color: var(--text);
+  background: var(--glass);
+  font-size: 27px;
+  line-height: 1;
+  cursor: pointer;
+  transition: border-color var(--transition), background var(--transition);
+}
+
+.gif-modal-close:hover {
+  border-color: var(--accent);
+  background: rgba(123, 92, 255, 0.18);
+}
+
+.gif-modal-content {
+  display: flex;
+  min-height: 160px;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  overflow: auto;
+  background: rgba(0, 0, 0, 0.16);
+}
+
 .gif-modal-img {
-  width: 100%;
-  border-radius: var(--radius-sm);
-  margin-bottom: 12px;
+  display: block;
+  width: auto;
+  max-width: 100%;
+  height: auto;
+  max-height: 65vh;
+  object-fit: contain;
+  border-radius: 12px;
+  background: #fff;
   box-shadow: var(--shadow);
+}
+
+.gif-modal-empty {
+  margin: 0;
+  padding: 35px 15px;
+  color: var(--text-muted);
+  font-size: 14px;
+  text-align: center;
+}
+
+.gif-modal-footer {
+  display: flex;
+  flex-shrink: 0;
+  justify-content: flex-end;
+  padding: 14px 23px;
+  border-top: 1px solid var(--border);
+}
+
+.gif-modal-close-button {
+  min-height: 40px;
+  padding: 10px 20px;
+  border: 1px solid rgba(123, 92, 255, 0.55);
+  border-radius: 10px;
+  color: #fff;
+  background: rgba(123, 92, 255, 0.18);
+  font-size: 13px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: background var(--transition), border-color var(--transition);
+}
+
+.gif-modal-close-button:hover {
+  border-color: var(--accent);
+  background: var(--accent);
+}
+
+.gif-modal-close:focus-visible,
+.gif-modal-close-button:focus-visible {
+  outline: 2px solid var(--accent-hover);
+  outline-offset: 3px;
+}
+
+@media (max-width: 600px) {
+  .gif-modal-backdrop {
+    padding: 10px;
+  }
+
+  .gif-modal-panel {
+    max-height: 94vh;
+    border-radius: 15px;
+  }
+
+  .gif-modal-header {
+    padding: 15px;
+  }
+
+  .gif-modal-header h2 {
+    font-size: 17px;
+  }
+
+  .gif-modal-content {
+    min-height: 120px;
+    padding: 12px;
+  }
+
+  .gif-modal-img {
+    max-height: 68vh;
+    border-radius: 9px;
+  }
+
+  .gif-modal-footer {
+    padding: 12px 15px;
+  }
 }

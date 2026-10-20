@@ -1,5 +1,61 @@
+
 .exercise-list {
   display: grid;
-  gap: 12px;
-  padding-bottom: 10px;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  align-items: stretch;
+  gap: 16px;
+  width: 100%;
+  min-width: 0;
+  padding-bottom: 16px;
+}
+
+.exercise-list-empty {
+  display: flex;
+  min-height: 220px;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 28px 20px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  background: var(--glass);
+  text-align: center;
+}
+
+.exercise-list-empty h3 {
+  margin: 0;
+  color: var(--text);
+  font-size: 17px;
+}
+
+.exercise-list-empty p {
+  margin: 9px 0 0;
+  color: var(--text-muted);
+  font-size: 13px;
+  line-height: 1.6;
+}
+
+@media (min-width: 1500px) {
+  .exercise-list {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 900px) {
+  .exercise-list {
+    gap: 12px;
+  }
+}
+
+@media (max-width: 600px) {
+  .exercise-list {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 11px;
+    padding-bottom: 12px;
+  }
+
+  .exercise-list-empty {
+    min-height: 190px;
+    padding: 22px 16px;
+  }
 }

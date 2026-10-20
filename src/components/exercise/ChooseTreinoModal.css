@@ -1,22 +1,259 @@
+
+.choose-treino-backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 1050;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  overflow-y: auto;
+  background: rgba(5, 5, 12, 0.78);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+}
+
+.choose-treino-panel {
+  position: relative;
+  width: min(100%, 480px);
+  padding: 27px;
+  border: 1px solid var(--border);
+  border-radius: 22px;
+  color: var(--text);
+  background: #15151d;
+  box-shadow: 0 24px 80px rgba(0, 0, 0, 0.5);
+}
+
+.choose-treino-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 20px;
+}
+
+.choose-treino-icon {
+  display: flex;
+  width: 48px;
+  height: 48px;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid rgba(123, 92, 255, 0.3);
+  border-radius: 14px;
+  color: var(--accent-hover);
+  background: rgba(123, 92, 255, 0.12);
+}
+
+.choose-treino-icon svg {
+  width: 25px;
+  height: 25px;
+}
+
+.choose-treino-close {
+  display: flex;
+  width: 37px;
+  height: 37px;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  color: var(--text-muted);
+  background: var(--glass);
+  font-size: 25px;
+  cursor: pointer;
+  transition: color var(--transition), border-color var(--transition);
+}
+
+.choose-treino-close:hover {
+  border-color: var(--accent);
+  color: var(--text);
+}
+
+.choose-treino-eyebrow {
+  display: block;
+  margin-bottom: 8px;
+  color: var(--accent-hover);
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: 1.5px;
+}
+
+.choose-treino-panel h2 {
+  margin: 0;
+  font-size: clamp(23px, 4vw, 28px);
+  font-weight: 800;
+  letter-spacing: -0.6px;
+}
+
+.choose-treino-description {
+  margin: 10px 0 20px;
+  color: var(--text-muted);
+  font-size: 13px;
+  line-height: 1.7;
+}
+
+.choose-treino-exercise {
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+  margin-bottom: 20px;
+  padding: 15px;
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.035);
+}
+
+.choose-treino-exercise-label {
+  color: var(--text-muted);
+  font-size: 9px;
+  font-weight: 800;
+  letter-spacing: 1.3px;
+}
+
+.choose-treino-exercise strong {
+  overflow-wrap: anywhere;
+  color: var(--text);
+  font-size: 15px;
+  line-height: 1.5;
+}
+
+.choose-treino-exercise-category {
+  align-self: flex-start;
+  padding: 4px 8px;
+  border: 1px solid rgba(123, 92, 255, 0.25);
+  border-radius: 6px;
+  color: var(--accent-hover);
+  background: rgba(123, 92, 255, 0.1);
+  font-size: 10px;
+  font-weight: 700;
+}
+
 .choose-buttons {
   display: flex;
-  gap: 12px;
-  margin: 18px 0;
+  flex-direction: column;
+  gap: 10px;
+  margin: 0 0 18px;
 }
 
 .choose-btn {
-  flex: 1;
-  padding: 10px 14px;
-  border-radius: 999px;
-  border: none;
-  background: var(--glass);
+  display: flex;
+  width: 100%;
+  min-height: 70px;
+  align-items: center;
+  gap: 13px;
+  padding: 12px 14px;
   border: 1px solid var(--border);
+  border-radius: 13px;
   color: var(--text);
+  background: var(--glass);
+  text-align: left;
   cursor: pointer;
-  transition: var(--transition);
+  transition: border-color var(--transition), background var(--transition),
+    transform var(--transition);
 }
 
 .choose-btn:hover {
-  background: var(--glass-strong);
-  transform: scale(1.05);
+  transform: translateY(-1px);
+  border-color: var(--accent);
+  background: rgba(123, 92, 255, 0.12);
+}
+
+.choose-btn-letter {
+  display: flex;
+  width: 42px;
+  height: 42px;
+  flex-shrink: 0;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid rgba(123, 92, 255, 0.3);
+  border-radius: 11px;
+  color: #fff;
+  background: rgba(123, 92, 255, 0.2);
+  font-size: 17px;
+  font-weight: 800;
+}
+
+.choose-btn-text {
+  display: flex;
+  min-width: 0;
+  flex: 1;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.choose-btn-text strong {
+  font-size: 13px;
+  font-weight: 750;
+}
+
+.choose-btn-text small {
+  color: var(--text-muted);
+  font-size: 11px;
+  line-height: 1.4;
+}
+
+.choose-btn-arrow {
+  flex-shrink: 0;
+  color: var(--accent-hover);
+  font-size: 20px;
+  transition: transform var(--transition);
+}
+
+.choose-btn:hover .choose-btn-arrow {
+  transform: translateX(3px);
+}
+
+.choose-treino-cancel {
+  width: 100%;
+  min-height: 42px;
+  padding: 10px 14px;
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  color: var(--text-muted);
+  background: transparent;
+  font-size: 12px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: color var(--transition), background var(--transition);
+}
+
+.choose-treino-cancel:hover {
+  color: var(--text);
+  background: var(--glass);
+}
+
+.choose-treino-close:focus-visible,
+.choose-btn:focus-visible,
+.choose-treino-cancel:focus-visible {
+  outline: 2px solid var(--accent-hover);
+  outline-offset: 3px;
+}
+
+@media (max-width: 480px) {
+  .choose-treino-backdrop {
+    padding: 12px;
+  }
+
+  .choose-treino-panel {
+    padding: 21px 17px;
+    border-radius: 17px;
+  }
+
+  .choose-treino-header {
+    margin-bottom: 17px;
+  }
+
+  .choose-treino-exercise {
+    padding: 12px;
+  }
+
+  .choose-btn {
+    min-height: 65px;
+    gap: 10px;
+    padding: 10px;
+  }
+
+  .choose-btn-letter {
+    width: 38px;
+    height: 38px;
+  }
 }

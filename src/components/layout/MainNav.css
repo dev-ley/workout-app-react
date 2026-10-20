@@ -1,39 +1,103 @@
 .main-nav {
-  display: flex;
-  justify-content: space-around;
-  padding: 10px;
-  border-radius: var(--radius);
-  background: var(--glass);
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  align-items: stretch;
+  gap: 8px;
+  width: 100%;
+  padding: 8px;
   border: 1px solid var(--border);
+  border-radius: var(--radius);
+  background: rgba(255, 255, 255, 0.035);
   box-shadow: var(--shadow);
 }
 
-/* BOTÕES DO NAV */
 .nav-btn {
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   align-items: center;
-  color: var(--text);
+  justify-content: center;
+  gap: 10px;
+  min-width: 0;
+  min-height: 48px;
+  padding: 10px 14px;
+  border: 1px solid transparent;
+  border-radius: var(--radius-sm);
   background: transparent;
-  border: none;
+  color: var(--text-muted);
+  font-size: 0.9rem;
+  font-weight: 600;
   cursor: pointer;
-  font-size: 14px;
-  transition: var(--transition);
+  transition:
+    background 0.2s ease,
+    color 0.2s ease,
+    border-color 0.2s ease;
 }
 
-/* ÍCONES */
 .nav-icon {
-  font-size: 22px;
-  margin-bottom: 4px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex: 0 0 auto;
+  font-size: 1.25rem;
+  line-height: 1;
 }
 
-/* BOTÃO ATIVO */
-.nav-btn.active {
-  color: var(--accent);
-  transform: scale(1.05);
+.nav-label {
+  min-width: 0;
+  overflow-wrap: normal;
+  text-align: center;
 }
 
-/* HOVER */
 .nav-btn:hover {
-  color: var(--accent-hover);
+  color: var(--text);
+  background: var(--glass);
+}
+
+.nav-btn.active {
+  color: #fff;
+  background: var(--gradient-accent);
+  border-color: rgba(155, 125, 255, 0.3);
+  box-shadow: 0 4px 14px rgba(123, 92, 255, 0.18);
+}
+
+.nav-btn:focus-visible {
+  outline: 2px solid var(--accent-hover);
+  outline-offset: 2px;
+}
+
+/* TABLETS E TELEMÓVEIS */
+
+@media (max-width: 600px) {
+  .main-nav {
+    gap: 4px;
+    padding: 5px;
+  }
+
+  .nav-btn {
+    flex-direction: column;
+    gap: 5px;
+    min-height: 58px;
+    padding: 8px 3px;
+    font-size: 0.72rem;
+  }
+
+  .nav-icon {
+    font-size: 1.25rem;
+  }
+}
+
+@media (max-width: 360px) {
+  .nav-btn {
+    font-size: 0.66rem;
+  }
+
+  .nav-icon {
+    font-size: 1.1rem;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .nav-btn {
+    transition: none;
+  }
 }

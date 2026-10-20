@@ -1,0 +1,14 @@
+
+{
+  "$schema": "https://openapi.vercel.sh/vercel.json",
+  "crons": [
+    {
+      "path": "/api/lembrete-diario",
+      "schedule": "0 6 * * *"
+    },
+    {
+      "path": "/api/lembrete-diario",
+      "schedule": "0 7 * * *"
+    }
+  ]
+}
